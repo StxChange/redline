@@ -19,6 +19,14 @@ jobs:
         with:
           submodules: true
           lfs: false
+      - name: Prepare deploy artifact (exclude build directory)
+        if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+        run: |
+          echo "Preparing artifact folder (excluding 'build')"
+          rm -rf ./artifact || true
+          mkdir -p ./artifact
+          rsync -a --exclude='build' --exclude='.git' --exclude='.github' --exclude='node_modules' ./ ./artifact/
+        shell: bash
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
@@ -29,8 +37,8 @@ jobs:
           action: "upload"
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-          # Deploy the repository root so the current site at repo root (index.html + assets/) is published
-          app_location: "." # app is at repository root (publish this repo)
+          # Deploy the cleaned artifact folder (repo root minus 'build')
+          app_location: "./artifact" # deploy cleaned artifact
           api_location: "" # Api source code path - optional
           output_location: "" # upload-only from repo root
           ###### End of Repository/Build Configurations ######
