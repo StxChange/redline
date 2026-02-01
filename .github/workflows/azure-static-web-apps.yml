@@ -13,6 +13,20 @@ jobs:
       - name: Checkout GitHub repo
         uses: actions/checkout@v4
 
+      - name: Verify AZURE_STATIC_WEB_APPS_API_TOKEN is available
+        env:
+          AZURE_STATIC_WEB_APPS_API_TOKEN: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+        run: |
+          echo "Checking for Azure deployment token..."
+          if [ -z "$AZURE_STATIC_WEB_APPS_API_TOKEN" ]; then
+            echo "ERROR: AZURE_STATIC_WEB_APPS_API_TOKEN is not set. Add it under repo Settings → Secrets → Actions." >&2
+            exit 1
+          fi
+          echo "Token appears set (masked). Listing root files for debugging:"
+          ls -la
+          echo "Showing index.html head (first 20 lines):"
+          head -n 20 index.html || true
+
       - name: 'Deploy to Azure Static Web Apps'
         uses: Azure/static-web-apps-deploy@v1
         with:
