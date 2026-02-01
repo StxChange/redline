@@ -36,7 +36,7 @@ jobs:
           action: "upload"
           app_location: "." # app is at repository root (use '.' for repo-relative path)
           api_location: ""   # no Azure Functions API
-          # output_location omitted for upload-only (no build step)
+          output_location: "" # upload-only from repo root
 
 # Notes:
 # 1) Create an Azure Static Web App in the Azure Portal or with the Azure CLI. During creation you'll
