@@ -38,7 +38,7 @@ jobs:
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
           # Deploy the cleaned artifact folder (repo root minus 'build')
-          app_location: "./artifact" # deploy cleaned artifact
+          app_location: "" # deploy cleaned artifact
           api_location: "" # Api source code path - optional
           output_location: "" # upload-only from repo root
           ###### End of Repository/Build Configurations ######
