@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="140" height="28" viewBox="0 0 140 28" role="img" aria-label="Scan with VirusTotal">
+  <rect rx="6" width="140" height="28" fill="#fff" opacity="0.03"/>
+  <g font-family="Segoe UI, Arial, sans-serif" font-size="12">
+    <text x="36" y="18" fill="#cfe8ff">Scan with</text>
+    <circle cx="22" cy="14" r="9" fill="#ff5a5f"/>
+    <text x="16" y="18" fill="#071827" font-weight="700">VT</text>
+  </g>
+</svg>

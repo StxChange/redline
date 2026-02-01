@@ -1,0 +1,111 @@
+:root{
+	--bg: #0f1720;
+	--card: #0b1220;
+	--accent: #e11d48;
+	--muted: #9aa4b2;
+	--glass: rgba(255,255,255,0.04);
+}
+
+*{box-sizing:border-box}
+
+body{
+	font-family: Inter, "Segoe UI", system-ui, Roboto, "Helvetica Neue", Arial, sans-serif;
+	background: linear-gradient(180deg,#071027 0%,#0b1220 100%);
+	color: #e6eef6;
+	margin: 0;
+	line-height: 1.45;
+}
+
+a{color:var(--accent)}
+
+.container{max-width:980px;margin:0 auto;padding:28px}
+
+/* header */
+header.hero{padding:0;background:transparent;position:relative}
+header h1{font-size:36px;margin:0 0 8px}
+.tagline{color:var(--muted);margin:0 0 18px}
+
+.cta{margin-top:12px}
+
+a.btn{display:inline-block;background:var(--accent);color:white;padding:12px 18px;border-radius:8px;text-decoration:none;margin:0 8px;font-weight:600}
+a.btn-outline{background:transparent;border:1px solid rgba(255,255,255,0.06)}
+
+main{padding:36px 0}
+section{margin-bottom:28px}
+
+.features-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;list-style:none;padding:0;margin:12px 0}
+.features-list li{background:var(--card);padding:14px;border-radius:8px;border:1px solid rgba(255,255,255,0.02)}
+
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px}
+.gallery-grid figure{background:var(--glass);border-radius:12px;padding:12px;text-align:center;border:1px solid rgba(255,255,255,0.03)}
+.gallery-grid img{width:100%;height:140px;object-fit:contain}
+
+footer{border-top:1px solid rgba(255,255,255,0.03);padding:18px 0;text-align:center;color:var(--muted);font-size:13px}
+
+code{background:rgba(255,255,255,0.03);padding:2px 6px;border-radius:6px;color:#cfe8ff}
+figcaption{margin-top:8px;color:var(--muted)}
+
+/* Lightbox styles */
+.lightbox-overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,0.8);z-index:1200;padding:24px}
+.lightbox-overlay.open{display:flex}
+.lightbox-content{max-width:96%;max-height:96%;box-shadow:0 12px 40px rgba(2,6,23,0.7);border-radius:10px;overflow:hidden}
+.lightbox-content img{display:block;max-width:100%;max-height:100%;height:auto}
+.lightbox-close{position:fixed;right:22px;top:18px;color:var(--muted);background:rgba(255,255,255,0.04);border-radius:8px;padding:8px 10px;cursor:pointer}
+.lightbox-nav{position:fixed;left:0;right:0;top:50%;display:flex;justify-content:space-between;pointer-events:none}
+.lightbox-nav button{pointer-events:auto;background:rgba(255,255,255,0.04);border:0;color:var(--muted);padding:14px;border-radius:999px;margin:0 12px;cursor:pointer}
+.lightbox-trigger img{width:100%;height:140px;object-fit:cover;border-radius:8px}
+
+/* Badge / verification styles */
+.download-row{display:flex;gap:12px;align-items:center}
+.badge{height:28px}
+.verification{background:var(--card);padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.02);color:var(--muted)}
+.cmd{background:rgba(255,255,255,0.03);padding:8px;border-radius:6px;font-family:Consolas,Monaco,monospace;color:#cfe8ff}
+
+/* Hero video + header overlay */
+/* Hero video wrapper and sizing */
+.hero-video-wrap{position:relative;width:100%;height:360px;overflow:hidden;background:#05121b;z-index:1}
+.hero-video{width:100%;height:100%;object-fit:cover;object-position:50% 50%;filter:brightness(0.45) saturate(0.9);display:block}
+
+/* Header text overlays the video when there's room; on small screens it stacks below */
+.header-row{position:static;display:flex;align-items:center;justify-content:center;padding:10px 20px;z-index:5}
+.header-text{pointer-events:auto;z-index:6;text-align:center;margin:0 auto;max-width:980px}
+.header-text h1{margin:0}
+.header-text .cta{margin-top:12px}
+
+.hero-mute{display:none;position:absolute;right:18px;bottom:14px;background:rgba(0,0,0,0.5);color:#fff;border:0;padding:10px;border-radius:8px;cursor:pointer;font-size:16px;z-index:4}
+.hero-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.5);color:#fff;border:0;padding:18px;border-radius:999px;cursor:pointer;font-size:22px;display:none;z-index:4}
+
+
+/* Responsive hero sizing and header overlay behavior */
+@media (min-width:1200px) {
+	/* Large desktop */
+	.hero-video-wrap{height:420px}
+	.header-row{position:absolute;top:50%;left:0;width:100%;transform:translateY(-50%);padding:0 20px;pointer-events:none}
+	.header-text{pointer-events:auto}
+}
+
+@media (min-width:900px) and (max-width:1199px) {
+	/* Desktop / large laptop */
+	.hero-video-wrap{height:360px}
+	.header-row{position:absolute;top:50%;left:0;width:100%;transform:translateY(-50%);padding:0 20px;pointer-events:none}
+}
+
+@media (min-width:700px) and (max-width:899px) {
+	/* Small laptop / large tablet */
+	.hero-video-wrap{height:320px}
+	.header-row{position:absolute;top:50%;left:0;width:100%;transform:translateY(-50%);padding:0 20px;pointer-events:none}
+}
+
+@media (max-width:699px) {
+	/* Phones and small tablets - stack header below video */
+	.header-row{position:static;transform:none;margin-top:12px}
+	.hero-video-wrap{height:260px}
+	.hero-play{display:block}
+}
+
+@media (max-width:480px){
+	.hero-video-wrap{height:180px}
+}
+
+/* Small utilities */
+.badge{height:28px}

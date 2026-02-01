@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Redline Pricing Guide — Hot Wheels Collection Manager</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-video-wrap">
+      <video id="heroVideo" class="hero-video" autoplay muted loop playsinline preload="auto" poster="assets/video_poster.jpg">
+        <source src="assets/video_web.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <button id="heroMute" class="hero-mute" aria-label="Unmute">🔇</button>
+      <button id="heroPlay" class="hero-play" aria-label="Play/Pause">▶</button>
+    </div>
+    <div class="container header-row">
+      <div class="header-text">
+        <h1>Redline Pricing Guide</h1>
+        <p class="tagline">Catalog • Value • Manage • Trade — a collector-focused toolkit for Redline Hot Wheels</p>
+        <div class="cta">
+          <div class="download-row">
+            <a class="btn" href="dist/Hotwheels_Manager_StxChange.exe" download>Download EXE (Windows)</a>
+            <img class="badge" src="assets/virus_scan_badge.svg" alt="Scan badge" title="Scan with VirusTotal" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="about">
+      <h2>What this is</h2>
+      <p>The Redline Manager provides a simple way to download and try the program. The program helps collectors track, value, and export their collections.</p>
+    </section>
+
+    <section id="features">
+      <h2>hotwheels_manager — key features</h2>
+      <ul class="features-list">
+        <li><strong>Import / Export</strong> — Read and write inventories from Excel/CSV for quick data portability.</li>
+        <li><strong>Search & Filter</strong> — Find items by year, model, series, condition, or notes.</li>
+        <li><strong>Valuation Estimates</strong> — Integrate price lookups (e.g., eBay completed listings) to surface an estimated value range.</li>
+        <li><strong>Tagging & Notes</strong> — Keep provenance, grade, and seller notes attached to each item.</li>
+        <li><strong>Image Attachments</strong> — Store and preview photos of your cars (local paths supported).</li>
+        <li><strong>Printable Inventory</strong> — Generate printable/exportable lists for shows or insurance documentation.</li>
+        <li><strong>Marketplace Links</strong> — Quick "Find on eBay" affiliate links to help you buy or sell.</li>
+        <li><strong>Lightweight & Offline</strong> — The Python CLI/UI runs locally — no mandatory cloud account required.</li>
+      </ul>
+    </section>
+
+    <section id="gallery">
+      <h2>Featured: Uncommon Redline Hot Wheels</h2>
+      <div class="gallery-grid">
+        <!-- Use a tiny transparent placeholder as initial src, data-src/data-srcset will be swapped in when the image is near the viewport -->
+        <figure>
+          <a class="lightbox-trigger" href="RedlineImages/olds-442.jpg">
+            <img class="lazyload" loading="lazy" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+                 data-src="RedlineImages/olds-442.jpg"
+                 data-srcset="RedlineImages/olds-442.jpg 600w, RedlineImages/olds-442.jpg 1200w"
+                 sizes="(max-width:600px) 100vw, 33vw"
+                 alt="Olds 442 Redline Hot Wheels" />
+          </a>
+          <figcaption>Olds 442 (Redline era photo)</figcaption>
+        </figure>
+        <figure>
+          <a class="lightbox-trigger" href="RedlineImages/Maveric.jpg">
+            <img class="lazyload" loading="lazy" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+                 data-src="RedlineImages/Maveric.jpg"
+                 data-srcset="RedlineImages/Maveric.jpg 600w, RedlineImages/Maveric.jpg 1200w"
+                 sizes="(max-width:600px) 100vw, 33vw"
+                 alt="Maveric Redline Hot Wheels" />
+          </a>
+          <figcaption>Maveric (photo)</figcaption>
+        </figure>
+        <figure>
+          <a class="lightbox-trigger" href="RedlineImages/Bandit.jpg">
+            <img class="lazyload" loading="lazy" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+                 data-src="RedlineImages/Bandit.jpg"
+                 data-srcset="RedlineImages/Bandit.jpg 600w, RedlineImages/Bandit.jpg 1200w"
+                 sizes="(max-width:600px) 100vw, 33vw"
+                 alt="Bandit Redline Hot Wheels" />
+          </a>
+          <figcaption>Bandit (photo)</figcaption>
+        </figure>
+        <figure>
+          <a class="lightbox-trigger" href="RedlineImages/HWVWGOLD.webp">
+            <img class="lazyload" loading="lazy" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+                 data-src="RedlineImages/HWVWGOLD.webp"
+                 data-srcset="RedlineImages/HWVWGOLD.webp 600w, RedlineImages/HWVWGOLD.webp 1200w"
+                 sizes="(max-width:600px) 100vw, 33vw"
+                 alt="VW Gold Redline Hot Wheels" />
+          </a>
+          <figcaption>VW (gold) (photo)</figcaption>
+        </figure>
+        <!-- Stylized placeholder removed from public gallery -->
+      </div>
+    </section>
+
+    <section id="howto">
+      <h2>How to try the program</h2>
+      <ol>
+  <li>Click the <strong>Download EXE (Windows)</strong> button above.</li>
+  <li>To run the Windows standalone executable: double-click <code>Hotwheels_Manager_StxChange.exe</code> — no Python required.</li>
+  <li>Make sure your Excel file (e.g. <code>Redline_Hot_Wheels_Collection.xlsx</code>) is in the same folder as the executable.</li>
+      </ol>
+    </section>
+
+    <section id="exe-instructions">
+      <h2>EXE Instructions</h2>
+      <details>
+        <summary>Read the packaged instructions for the Windows EXE</summary>
+      <pre id="exe-readme" style="white-space:pre-wrap;background:rgba(255,255,255,0.02);padding:12px;border-radius:8px;margin-top:12px;color:var(--muted)">Hot Wheels Collection Manager - Standalone Executable
+====================================================
+
+VERSION: Hotwheels_Manager_StxChange.exe
+CREATED: 2026-01-25
+
+HOW TO RUN
+----------
+Simply double-click "Hotwheels_Manager_StxChange.exe" to launch the application.
+
+IMPORTANT FILES
+---------------
+- Hotwheels_Manager_StxChange.exe  -> The application (71MB)
+- Redline_Hot_Wheels_Collection.xlsx -> Your collection database
+
+REQUIREMENTS
+------------
+- Windows 10 or later
+- NO Python installation required (everything is bundled)
+- NO additional dependencies needed
+- The Excel file must be in the same directory as the exe
+
+FIRST TIME SETUP
+----------------
+1. Copy both files (the .exe and .xlsx) to a folder on your computer
+2. Double-click Hotwheels_Manager_StxChange.exe
+3. The GUI will open and load your collection automatically
+
+FEATURES
+--------
+- View and search your Hot Wheels collection
+- Add new cars to your collection
+- Update single car prices (automatic or manual)
+- Batch update all prices
+- Real-time statistics (investment, market value, profit/loss)
+- Automatic backups on every save
+
+TABS
+----
+1. Collection - Browse, search, view details, delete cars
+2. Add New Car - Form to add new purchases
+3. Update Single - Update one car's price (manual entry recommended)
+4. Update All Prices - Batch price updates with progress tracking
+
+AUTO-SAVE
+---------
+The application automatically saves when you:
+- Add a new car
+- Delete a car
+- Update prices
+
+Backups are created automatically with timestamps.
+
+TROUBLESHOOTING
+---------------
+Q: Application won't start
+A: Make sure the Excel file is in the same folder as the exe
+
+Q: Can't see the Excel file
+A: Windows might show it as just "Redline_Hot_Wheels_Collection" without the .xlsx extension
+
+Q: Price updates fail
+A: eBay scraping is unreliable due to dynamic content. Use Manual Price Entry instead:
+  - Research prices on eBay.com manually
+  - Enter the price in the "Manual Price Entry" section
+  - This method always works
+
+Q: Where are my backups?
+A: In the same folder as the exe, named like:
+  Redline_Hot_Wheels_Collection_backup_20260125_183000.xlsx
+
+TIPS
+----
+- Keep the exe and Excel file together in the same folder
+- Regular backups are created automatically (no action needed)
+- Use Manual Price Entry for reliable price updates
+- The progress console in "Update All Prices" shows real-time status
+
+SUPPORT
+-------
+All features from the Python version are included:
+- 4-tab interface with improved organization
+- Separate progress consoles for single and batch operations
+- Auto-save with automatic backups
+- Manual price entry feature (recommended)
+
+For detailed usage instructions, see GUI_GUIDE.md in the source folder.
+
+WHAT'S BUNDLED
+--------------
+This executable includes:
+- Python 3.11
+- pandas (data manipulation)
+- openpyxl (Excel file handling)
+- requests (web requests)
+- beautifulsoup4 (web scraping)
+- tkinter (GUI framework)
+- All other required dependencies
+
+Total size: 71MB (one single file, no installation needed)
+
+DEPLOYMENT
+----------
+To share with others or run on another computer:
+1. Copy the entire "dist" folder OR
+2. Copy just the .exe and .xlsx files together
+3. No Python or other software installation required
+4. Just double-click the exe to run
+
+Enjoy tracking your Hot Wheels collection!
+</pre>
+      </details>
+    </section>
+    <section id="verification">
+      <h2>Virus scan & verification</h2>
+      <div class="verification">
+        <p>For safety, we recommend verifying the downloaded executable before running it. Below are quick steps you can run in <code>PowerShell</code> on Windows.</p>
+        <h3>1) Compute SHA256 checksum</h3>
+        <p>Run this in the folder where you downloaded the EXE:</p>
+        <div class="cmd">Get-FileHash .\Hotwheels_Manager_StxChange.exe -Algorithm SHA256</div>
+
+        <h3>2) Scan with VirusTotal (optional)</h3>
+        <p>Upload the EXE to <a href="https://www.virustotal.com" target="_blank" rel="noreferrer">VirusTotal</a> or use their API to check multiple AV engines. It's recommended to only run the EXE if the file is clean or from a trusted source.</p>
+
+        <h3>Notes</h3>
+        <ul>
+          <li>If you see unexpected detections, do not run the file and contact the project maintainer.</li>
+          <li>Always keep backups of your Excel collection before running any program that modifies files.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Interested in more?</h2>
+      <p>If you'd like a hosted catalog, marketplace integrations, or a premium valuation dashboard, reply here and we can plan the next steps.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+  <p>© Redline Pricing Guide — Local demo site. Contact: <a href="mailto:eric@stxchange.com">eric@stxchange.com</a>. Do not upload copyrighted photos without permission.</p>
+    </div>
+  </footer>
+  <script src="assets/lightbox.js"></script>
+  <script src="assets/hero-video.js"></script>
+</body>
+</html>
