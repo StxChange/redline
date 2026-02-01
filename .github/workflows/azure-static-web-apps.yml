@@ -13,8 +13,9 @@ jobs:
       - name: Checkout GitHub repo
         uses: actions/checkout@v4
 
-      - name: Verify AZURE_STATIC_WEB_APPS_API_TOKEN is available
+      - name: Verify AZURE_STATIC_WEB_APPS_API_TOKEN is available and list app files
         env:
+          APP_LOC: "."
           AZURE_STATIC_WEB_APPS_API_TOKEN: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
         run: |
           echo "Checking for Azure deployment token..."
@@ -22,10 +23,10 @@ jobs:
             echo "ERROR: AZURE_STATIC_WEB_APPS_API_TOKEN is not set. Add it under repo Settings → Secrets → Actions." >&2
             exit 1
           fi
-          echo "Token appears set (masked). Listing root files for debugging:"
-          ls -la
-          echo "Showing index.html head (first 20 lines):"
-          head -n 20 index.html || true
+          echo "Token appears set (masked). Listing contents of app_location=$APP_LOC for debugging:"
+          ls -la "$APP_LOC" || true
+          echo "Showing ${APP_LOC}/index.html head (first 20 lines) if present:"
+          head -n 20 "$APP_LOC/index.html" || true
 
       - name: 'Deploy to Azure Static Web Apps'
         uses: Azure/static-web-apps-deploy@v1
@@ -33,9 +34,9 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }} # created when provisioning the Static Web App
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for GitHub integrations (comments, PR status)
           action: "upload"
-          app_location: "/" # app is at repository root
+          app_location: "." # app is at repository root (use '.' for repo-relative path)
           api_location: ""   # no Azure Functions API
-          output_location: "" # no build output folder; upload files from root
+          # output_location omitted for upload-only (no build step)
 
 # Notes:
 # 1) Create an Azure Static Web App in the Azure Portal or with the Azure CLI. During creation you'll
