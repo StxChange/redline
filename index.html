@@ -4,6 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Redline Pricing Guide — Hot Wheels Collection Manager</title>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7TPZJBY0WN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7TPZJBY0WN');
+  </script>
   <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
@@ -22,8 +30,8 @@
         <p class="tagline">Catalog • Value • Manage • Trade — a collector-focused toolkit for Redline Hot Wheels</p>
         <div class="cta">
           <div class="download-row">
-            <a class="btn" href="https://github.com/StxChange/redline/releases/download/v1.1.0/Hotwheels_Manager_StxChange.exe" download>Download EXE (Windows)</a>
-            <a class="btn btn-outline" href="https://github.com/StxChange/redline/releases/download/v1.1.0/Redline_Hot_Wheels_Collection.xlsx" download>Download Collection Template (.xlsx)</a>
+            <a class="btn" href="https://github.com/StxChange/redline/releases/download/v1.1.0/Hotwheels_Manager_StxChange.exe" download onclick="gtag('event','download',{file_name:'Hotwheels_Manager_StxChange.exe'})">Download EXE (Windows)</a>
+            <a class="btn btn-outline" href="https://github.com/StxChange/redline/releases/download/v1.1.0/Redline_Hot_Wheels_Collection.xlsx" download onclick="gtag('event','download',{file_name:'Redline_Hot_Wheels_Collection.xlsx'})">Download Collection Template (.xlsx)</a>
           </div>
         </div>
       </div>
