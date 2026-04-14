@@ -105,6 +105,87 @@ figcaption{margin-top:8px;color:var(--muted)}
 	.hero-video-wrap{height:180px}
 }
 
+/* Etsy promo section */
+.etsy-card{
+  background: linear-gradient(135deg, #1a0a00 0%, #2d1200 60%, #1a0a00 100%);
+  border: 1px solid rgba(241,100,30,0.35);
+  border-radius: 16px;
+  padding: 32px 28px;
+  box-shadow: 0 0 50px rgba(241,100,30,0.08);
+  position: relative;
+  overflow: hidden;
+}
+.etsy-card::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background: radial-gradient(ellipse at top right, rgba(241,100,30,0.1) 0%, transparent 65%);
+  pointer-events:none;
+}
+.etsy-badge{
+  display:inline-block;
+  background:rgba(241,100,30,0.15);
+  border:1px solid rgba(241,100,30,0.4);
+  color:#f1641e;
+  font-size:13px;
+  font-weight:700;
+  padding:5px 14px;
+  border-radius:999px;
+  margin-bottom:18px;
+  letter-spacing:.03em;
+}
+.etsy-content{
+  display:flex;
+  align-items:center;
+  gap:32px;
+}
+.etsy-text{display:flex;flex-direction:column;gap:14px;flex:1}
+.etsy-title{font-size:24px;font-weight:800;margin:0;color:#fff}
+.etsy-desc{margin:0;color:var(--muted);line-height:1.65}
+.etsy-bullets{
+  margin:0;
+  padding:0 0 0 18px;
+  color:var(--muted);
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+.etsy-bullets li::marker{color:#f1641e}
+.etsy-btn{
+  display:inline-block;
+  background:#f1641e;
+  color:#fff;
+  text-decoration:none;
+  font-weight:700;
+  font-size:16px;
+  padding:13px 26px;
+  border-radius:10px;
+  width:fit-content;
+  transition:opacity .15s;
+}
+.etsy-btn:hover{opacity:.85;color:#fff}
+.etsy-icon-wrap{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  flex-shrink:0;
+}
+.etsy-car-img{width:160px;height:160px;object-fit:contain;filter:drop-shadow(0 4px 16px rgba(241,100,30,0.25))}
+.etsy-icon-label{
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:#f1641e;
+}
+@media(max-width:640px){
+  .etsy-content{flex-direction:column-reverse;gap:16px}
+  .etsy-car-img{width:100px;height:100px}
+  .etsy-card{padding:22px 18px}
+  .etsy-title{font-size:20px}
+}
+
 /* Contact section */
 .contact-card{
   display:flex;
