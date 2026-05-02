@@ -1,0 +1,37 @@
+Car	Grid pos	background-position
+Beatnik Bandit	col 0, row 0	0px 0px
+Custom Barracuda	col 1, row 0	-280px 0px
+Custom Camaro	col 2, row 0	-560px 0px
+Custom Corvette	col 3, row 0	-840px 0px
+Custom Cougar	col 0, row 1	0px -125px
+Custom El Dorado	col 1, row 1	-280px -125px
+Custom Firebird	col 2, row 1	-560px -125px
+Custom Fleetside	col 3, row 1	-840px -125px
+Custom Mustang	col 0, row 2	0px -250px
+Custom T-Bird	col 1, row 2	-280px -250px
+Custom Volkswagen	col 2, row 2	-560px -250px
+Deora	col 3, row 2	-840px -250px
+Ford J-Car	col 0, row 3	0px -374px
+Hot Heap	col 1, row 3	-280px -374px
+Python	col 2, row 3	-560px -374px
+Silhouette	col 3, row 3	-840px -374px
+Each column is 280px apart, each row is 125px apart. background-size: 1120px 499px stays constant for all cards.
+
+
+Beatnik Bandit
+Custom Barracuda
+Custom Camaro
+Custom Corvette
+Custom Cougar
+Custom El Dorado
+Custom Firebird
+Custom Fleetside
+Custom Mustang
+Custom T-Bird
+Custom Volkswagen
+Deora
+Ford J-Car
+Hot Heap
+Python
+Silhouette
+

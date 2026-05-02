@@ -105,6 +105,44 @@ figcaption{margin-top:8px;color:var(--muted)}
 	.hero-video-wrap{height:180px}
 }
 
+/* Sweet 16 promo banner */
+.s16-banner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  background:linear-gradient(90deg,rgba(225,29,72,0.1) 0%,rgba(225,29,72,0.04) 100%);
+  border:1px solid rgba(225,29,72,0.25);
+  border-radius:12px;
+  padding:16px 22px;
+  text-decoration:none;
+  color:#e6eef6;
+  transition:border-color .2s, background .2s;
+}
+.s16-banner:hover{
+  border-color:rgba(225,29,72,0.55);
+  background:linear-gradient(90deg,rgba(225,29,72,0.16) 0%,rgba(225,29,72,0.06) 100%);
+  color:#e6eef6;
+}
+.s16-banner-left{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.s16-banner-badge{
+  background:var(--accent);
+  color:#fff;
+  font-size:11px;
+  font-weight:800;
+  padding:2px 9px;
+  border-radius:999px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  flex-shrink:0;
+}
+.s16-banner-text{font-size:15px;color:var(--muted)}
+.s16-banner-text strong{color:#e6eef6}
+.s16-banner-arrow{font-size:14px;font-weight:700;color:var(--accent);white-space:nowrap;flex-shrink:0}
+@media(max-width:500px){
+  .s16-banner{flex-direction:column;align-items:flex-start}
+}
+
 /* Etsy promo section */
 .etsy-card{
   background: linear-gradient(135deg, #1a0a00 0%, #2d1200 60%, #1a0a00 100%);
@@ -184,6 +222,49 @@ figcaption{margin-top:8px;color:var(--muted)}
   .etsy-car-img{width:100px;height:100px}
   .etsy-card{padding:22px 18px}
   .etsy-title{font-size:20px}
+}
+
+/* Etsy ad preview (ModifiedBetterCars.png lightbox trigger) */
+.etsy-ad-wrap{
+  margin-top:24px;
+  border-top:1px solid rgba(241,100,30,0.2);
+  padding-top:20px;
+}
+.etsy-ad-label{
+  font-size:13px;
+  color:var(--muted);
+  margin:0 0 10px;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+.etsy-ad-trigger{
+  display:block;
+  position:relative;
+  border-radius:10px;
+  overflow:hidden;
+  cursor:zoom-in;
+  text-decoration:none;
+}
+.etsy-ad-img{
+  display:block;
+  width:100%;
+  height:auto;
+  border-radius:10px;
+  transition:opacity .2s;
+}
+.etsy-ad-trigger:hover .etsy-ad-img{ opacity:.88; }
+.etsy-ad-zoom{
+  position:absolute;
+  bottom:12px;
+  right:14px;
+  background:rgba(0,0,0,0.6);
+  color:#fff;
+  font-size:13px;
+  font-weight:600;
+  padding:6px 12px;
+  border-radius:999px;
+  pointer-events:none;
+  letter-spacing:.03em;
 }
 
 /* Contact section */

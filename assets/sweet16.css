@@ -1,0 +1,417 @@
+/* ===== Sweet 16 Page Styles ===== */
+
+/* Nav bar */
+.s16-nav {
+  background: rgba(7,16,39,0.95);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding: 12px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(8px);
+}
+.s16-nav .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.s16-nav-back {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color .15s;
+}
+.s16-nav-back:hover { color: #e6eef6; }
+.s16-nav-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+/* Hero */
+.s16-hero {
+  position: relative;
+  padding: 72px 0 56px;
+  overflow: hidden;
+  text-align: center;
+}
+.s16-hero-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(225,29,72,0.18) 0%, transparent 65%),
+              linear-gradient(180deg, #0a0f1e 0%, #0b1220 100%);
+  z-index: 0;
+}
+.s16-hero-content {
+  position: relative;
+  z-index: 1;
+}
+.s16-year-badge {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .15em;
+  padding: 5px 18px;
+  border-radius: 999px;
+  margin-bottom: 18px;
+}
+.s16-hero h1 {
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 900;
+  margin: 0 0 14px;
+  letter-spacing: -.02em;
+  line-height: 1.1;
+}
+.s16-tagline {
+  color: var(--muted);
+  font-size: 17px;
+  max-width: 640px;
+  margin: 0 auto 36px;
+  line-height: 1.6;
+}
+.s16-stats {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+.s16-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.s16-stat-num {
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--accent);
+  line-height: 1;
+}
+.s16-stat-label {
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+/* Main layout */
+.s16-main { padding-bottom: 60px; }
+
+.s16-intro {
+  max-width: 720px;
+  margin: 0 auto 48px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* Cards grid */
+.s16-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 280px);
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 48px;
+}
+
+.s16-card {
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color .2s, transform .2s;
+  position: relative;
+}
+.s16-card:hover {
+  border-color: rgba(225,29,72,0.3);
+  transform: translateY(-3px);
+}
+
+.s16-card-num {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(0,0,0,0.55);
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  letter-spacing: .06em;
+  z-index: 2;
+}
+
+/* Card image — Sweet16Cars.png sprite sheet (4x4 grid)
+   background-size: 400% 400% = 4 cols × 4 rows, scale-independent.
+   background-position uses % pairs: col=(0|33.33|66.67|100)% row=(0|33.33|66.67|100)%
+   This ensures exactly one car shows regardless of card width. */
+.s16-card-img-wrap {
+  width: 100%;
+  aspect-ratio: 264.75 / 118;
+  overflow: hidden;
+  background-image: url(../RedlineImages/Sweet16Cars.png);
+  background-size: 400% 400%;
+  background-repeat: no-repeat;
+}
+
+/* Card body */
+.s16-card-body {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+.s16-car-name {
+  font-size: 18px;
+  font-weight: 800;
+  margin: 0;
+  color: #e6eef6;
+  line-height: 1.2;
+}
+.s16-designer {
+  font-size: 12px;
+  color: var(--accent);
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: .03em;
+}
+
+/* Color swatches */
+.s16-colors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.swatch {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.12);
+  cursor: default;
+  flex-shrink: 0;
+}
+.swatch:hover { transform: scale(1.3); transition: transform .1s; }
+
+/* Rarity */
+.s16-rarity {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.s16-rarity-label {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.s16-stars {
+  color: #c9a227;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+.s16-stars-special { color: var(--accent); }
+.s16-rarity-note {
+  font-size: 11px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* Collector note */
+.s16-note {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.55;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  padding-top: 10px;
+}
+
+/* Rarity legend */
+.s16-legend {
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin-bottom: 32px;
+}
+.s16-legend h3 {
+  margin: 0 0 16px;
+  font-size: 16px;
+  color: #e6eef6;
+}
+.s16-legend-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 32px;
+  margin-bottom: 14px;
+}
+.s16-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--muted);
+}
+.s16-legend-note {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.6;
+  opacity: .75;
+}
+
+/* CTA bar */
+.s16-cta-bar {
+  background: linear-gradient(135deg, #1a0a00 0%, #2d1200 100%);
+  border: 1px solid rgba(241,100,30,0.3);
+  border-radius: 12px;
+  padding: 24px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.s16-cta-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.s16-cta-text strong {
+  font-size: 17px;
+  color: #e6eef6;
+}
+.s16-cta-text span {
+  font-size: 14px;
+  color: var(--muted);
+}
+.s16-cta-btn {
+  background: #f1641e;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 12px 24px;
+  border-radius: 10px;
+  white-space: nowrap;
+  transition: opacity .15s;
+  flex-shrink: 0;
+}
+.s16-cta-btn:hover { opacity: .85; color: #fff; }
+
+/* Color Guide button */
+.s16-color-guide-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 999px;
+  padding: 10px 20px;
+  color: #e6eef6;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color .2s, background .2s;
+}
+.s16-color-guide-btn:hover {
+  border-color: rgba(255,255,255,0.22);
+  background: rgba(255,255,255,0.06);
+}
+.s16-color-dots {
+  display: flex;
+  gap: 4px;
+}
+.s16-color-dots span {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+/* Color Guide Modal */
+.s16-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(2,6,23,0.85);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  backdrop-filter: blur(4px);
+}
+.s16-modal-overlay.open { display: flex; }
+.s16-modal {
+  background: #0b1220;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.7);
+}
+.s16-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 22px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  flex-shrink: 0;
+}
+.s16-modal-header h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #e6eef6;
+}
+.s16-modal-close {
+  background: rgba(255,255,255,0.06);
+  border: none;
+  color: var(--muted);
+  font-size: 20px;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .15s;
+}
+.s16-modal-close:hover { background: rgba(255,255,255,0.12); color: #e6eef6; }
+.s16-modal-body {
+  overflow: auto;
+  padding: 16px;
+}
+.s16-modal-body img {
+  display: block;
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .s16-hero { padding: 48px 0 36px; }
+  .s16-stats { gap: 28px; }
+  .s16-stat-num { font-size: 28px; }
+  .s16-grid { grid-template-columns: 1fr; }
+  .s16-cta-bar { flex-direction: column; align-items: flex-start; }
+  .s16-legend { padding: 18px; }
+}

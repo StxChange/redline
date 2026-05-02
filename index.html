@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Redline Pricing Guide — Hot Wheels Collection Manager</title>
+  <title>Redline Pricing Guide — 1968 Hot Wheels Collector Resource</title>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-7TPZJBY0WN"></script>
   <script>
@@ -27,11 +27,11 @@
     <div class="container header-row">
       <div class="header-text">
         <h1>Redline Pricing Guide</h1>
-        <p class="tagline">Catalog • Value • Manage • Trade — a collector-focused toolkit for Redline Hot Wheels</p>
+        <p class="tagline">Your guide to 1968 Redline Hot Wheels — rarity, colors &amp; collector resources</p>
         <div class="cta">
           <div class="download-row">
-            <a class="btn" href="https://github.com/StxChange/redline/releases/download/v1.1.0/Hotwheels_Manager_StxChange.exe" download onclick="gtag('event','download',{file_name:'Hotwheels_Manager_StxChange.exe'})">Download EXE (Windows)</a>
-            <a class="btn btn-outline" href="https://github.com/StxChange/redline/releases/download/v1.1.0/Redline_Hot_Wheels_Collection.xlsx" download onclick="gtag('event','download',{file_name:'Redline_Hot_Wheels_Collection.xlsx'})">Download Collection Template (.xlsx)</a>
+            <a class="btn" href="sweet16.html" onclick="gtag('event','page_view',{page:'sweet16-hero-cta'})">Explore the Sweet 16 &rarr;</a>
+            <a class="btn btn-outline" href="https://www.etsy.com/listing/4487272371/hot-wheels-collection-tracker" target="_blank" rel="noopener" onclick="gtag('event','etsy_click',{item:'hero-cta'})">Get the Collection Tracker</a>
           </div>
         </div>
       </div>
@@ -39,7 +39,18 @@
   </header>
 
   <main class="container">
-<section id="etsy-promo">
+
+    <section id="sweet16-promo">
+      <a class="s16-banner" href="sweet16.html" onclick="gtag('event','page_view',{page:'sweet16'})">
+        <div class="s16-banner-left">
+          <span class="s16-banner-badge">New</span>
+          <span class="s16-banner-text"><strong>1968 Sweet 16 Redlines</strong> — Explore all 16 original cars, colors &amp; rarity guide</span>
+        </div>
+        <span class="s16-banner-arrow">View Guide &rarr;</span>
+      </a>
+    </section>
+
+    <section id="etsy-promo">
       <div class="etsy-card">
         <div class="etsy-badge">&#11088; Available on Etsy</div>
         <div class="etsy-content">
@@ -61,27 +72,19 @@
             <div class="etsy-icon-label">Digital Download</div>
           </div>
         </div>
+        <div class="etsy-ad-wrap">
+          <p class="etsy-ad-label">See what&rsquo;s inside &mdash; click to view full preview</p>
+          <a class="lightbox-trigger etsy-ad-trigger" href="RedlineImages/ModifiedBetterCars.png" onclick="gtag('event','view_ad',{item:'ModifiedBetterCars'})">
+            <img src="RedlineImages/ModifiedBetterCars.png" alt="Hot Wheels Collection Tracker — full preview" class="etsy-ad-img" />
+            <span class="etsy-ad-zoom">&#128269; Click to enlarge</span>
+          </a>
+        </div>
       </div>
-    </section>
-
-    <section id="features">
-      <h2>Hotwheels Manager — key features</h2>
-      <ul class="features-list">
-        <li><strong>Import / Export</strong> — Read and write inventories from Excel/CSV for quick data portability.</li>
-        <li><strong>Search & Filter</strong> — Find items by year, model, series, condition, or notes.</li>
-        <li><strong>Valuation Estimates</strong> — Integrate price lookups (e.g., eBay completed listings) to surface an estimated value range.</li>
-        <li><strong>Tagging & Notes</strong> — Keep provenance, grade, and seller notes attached to each item.</li>
-        <li><strong>Image Attachments</strong> — Store and preview photos of your cars (local paths supported).</li>
-        <li><strong>Printable Inventory</strong> — Generate printable/exportable lists for shows or insurance documentation.</li>
-        <li><strong>Marketplace Links</strong> — Quick "Find on eBay" affiliate links to help you buy or sell.</li>
-        <li><strong>Lightweight & Offline</strong> — The Python CLI/UI runs locally — no mandatory cloud account required.</li>
-      </ul>
     </section>
 
     <section id="gallery">
       <h2>Featured: Uncommon Redline Hot Wheels</h2>
       <div class="gallery-grid">
-        <!-- Use a tiny transparent placeholder as initial src, data-src/data-srcset will be swapped in when the image is near the viewport -->
         <figure>
           <a class="lightbox-trigger" href="RedlineImages/olds-442.jpg">
             <img class="lazyload" loading="lazy" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
@@ -122,138 +125,10 @@
           </a>
           <figcaption>VW (gold) (photo)</figcaption>
         </figure>
-        <!-- Stylized placeholder removed from public gallery -->
       </div>
     </section>
 
-    <section id="howto">
-      <h2>How to try the program</h2>
-      <ol>
-  <li>Click the <strong>Download EXE (Windows)</strong> button above.</li>
-  <li>To run the Windows standalone executable: double-click <code>Hotwheels_Manager_StxChange.exe</code> — no Python required.</li>
-  <li>Make sure your Excel file (e.g. <code>Redline_Hot_Wheels_Collection.xlsx</code>) is in the same folder as the executable.</li>
-      </ol>
-    </section>
-
-    <section id="exe-instructions">
-      <h2>EXE Instructions</h2>
-      <details>
-        <summary>Read the packaged instructions for the Windows EXE</summary>
-      <pre id="exe-readme" style="white-space:pre-wrap;background:rgba(255,255,255,0.02);padding:12px;border-radius:8px;margin-top:12px;color:var(--muted)">Hot Wheels Collection Manager - Standalone Executable
-====================================================
-
-VERSION: Hotwheels_Manager_StxChange.exe
-CREATED: 2026-01-25
-
-HOW TO RUN
-----------
-Simply double-click "Hotwheels_Manager_StxChange.exe" to launch the application.
-
-IMPORTANT FILES
----------------
-- Hotwheels_Manager_StxChange.exe  -> The application (71MB)
-- Redline_Hot_Wheels_Collection.xlsx -> Your collection database
-
-REQUIREMENTS
-------------
-- Windows 10 or later
-- NO Python installation required (everything is bundled)
-- NO additional dependencies needed
-- The Excel file must be in the same directory as the exe
-
-FIRST TIME SETUP
-----------------
-1. Copy both files (the .exe and .xlsx) to a folder on your computer
-2. Double-click Hotwheels_Manager_StxChange.exe
-3. The GUI will open and load your collection automatically
-
-FEATURES
---------
-- View and search your Hot Wheels collection
-- Add new cars to your collection
-- Update single car prices (automatic or manual)
-- Batch update all prices
-- Real-time statistics (investment, market value, profit/loss)
-- Automatic backups on every save
-
-TABS
-----
-1. Collection - Browse, search, view details, delete cars
-2. Add New Car - Form to add new purchases
-3. Update Single - Update one car's price (manual entry recommended)
-4. Update All Prices - Batch price updates with progress tracking
-
-AUTO-SAVE
----------
-The application automatically saves when you:
-- Add a new car
-- Delete a car
-- Update prices
-
-Backups are created automatically with timestamps.
-
-TROUBLESHOOTING
----------------
-Q: Application won't start
-A: Make sure the Excel file is in the same folder as the exe
-
-Q: Can't see the Excel file
-A: Windows might show it as just "Redline_Hot_Wheels_Collection" without the .xlsx extension
-
-Q: Price updates fail
-A: eBay scraping is unreliable due to dynamic content. Use Manual Price Entry instead:
-  - Research prices on eBay.com manually
-  - Enter the price in the "Manual Price Entry" section
-  - This method always works
-
-Q: Where are my backups?
-A: In the same folder as the exe, named like:
-  Redline_Hot_Wheels_Collection_backup_20260125_183000.xlsx
-
-TIPS
-----
-- Keep the exe and Excel file together in the same folder
-- Regular backups are created automatically (no action needed)
-- Use Manual Price Entry for reliable price updates
-- The progress console in "Update All Prices" shows real-time status
-
-SUPPORT
--------
-All features from the Python version are included:
-- 4-tab interface with improved organization
-- Separate progress consoles for single and batch operations
-- Auto-save with automatic backups
-- Manual price entry feature (recommended)
-
-For detailed usage instructions, see GUI_GUIDE.md in the source folder.
-
-WHAT'S BUNDLED
---------------
-This executable includes:
-- Python 3.11
-- pandas (data manipulation)
-- openpyxl (Excel file handling)
-- requests (web requests)
-- beautifulsoup4 (web scraping)
-- tkinter (GUI framework)
-- All other required dependencies
-
-Total size: 71MB (one single file, no installation needed)
-
-DEPLOYMENT
-----------
-To share with others or run on another computer:
-1. Copy the entire "dist" folder OR
-2. Copy just the .exe and .xlsx files together
-3. No Python or other software installation required
-4. Just double-click the exe to run
-
-Enjoy tracking your Hot Wheels collection!
-</pre>
-      </details>
-    </section>
-
-<section id="contact">
+    <section id="contact">
       <h2>Get in Touch</h2>
       <div class="contact-card">
         <div class="contact-icon">&#9993;</div>
@@ -264,7 +139,7 @@ Enjoy tracking your Hot Wheels collection!
             <li>Buying or selling a Redline collection</li>
             <li>Partnership or marketplace integrations</li>
             <li>Premium valuation &amp; appraisal services</li>
-            <li>Questions about the app or your collection</li>
+            <li>Questions about the collection tracker</li>
           </ul>
           <a class="contact-email-btn" href="mailto:eric@stxchange.com">
             <span class="contact-email-icon">&#9993;</span>
@@ -274,11 +149,12 @@ Enjoy tracking your Hot Wheels collection!
         </div>
       </div>
     </section>
+
   </main>
 
   <footer>
     <div class="container">
-  <p>© Redline Pricing Guide — Local demo site. Contact: <a href="mailto:eric@stxchange.com">eric@stxchange.com</a>. Do not upload copyrighted photos without permission.</p>
+      <p>© Redline Pricing Guide — Contact: <a href="mailto:eric@stxchange.com">eric@stxchange.com</a></p>
     </div>
   </footer>
   <script src="assets/lightbox.js"></script>
