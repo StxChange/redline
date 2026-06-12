@@ -607,6 +607,9 @@
   opacity: .75;
 }
 
+/* Promo banner used directly inside the page body (no wrapping section) */
+.s16-main > .s16-banner { margin-bottom: 32px; }
+
 /* Responsive */
 @media (max-width: 600px) {
   .s16-hero { padding: 48px 0 36px; }
