@@ -4,6 +4,51 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>1968 Sweet 16 Redlines — Hot Wheels First Edition</title>
+  <meta name="description" content="All 16 original 1968 Hot Wheels Redlines: Spectraflame colors, rarity ratings, designer history and collector value ranges for the Sweet 16 — from the Beatnik Bandit to the Python." />
+  <link rel="canonical" href="https://www.redlinepricing.com/sweet16.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Redline Pricing Guide" />
+  <meta property="og:url" content="https://www.redlinepricing.com/sweet16.html" />
+  <meta property="og:title" content="1968 Sweet 16 Redlines — Hot Wheels First Edition" />
+  <meta property="og:description" content="All 16 original 1968 Hot Wheels Redlines: Spectraflame colors, rarity ratings, designer history and collector value ranges." />
+  <meta property="og:image" content="https://www.redlinepricing.com/RedlineImages/Sweet16Cars.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="1968 Sweet 16 Redlines — Hot Wheels First Edition" />
+  <meta name="twitter:description" content="All 16 original 1968 Hot Wheels Redlines: Spectraflame colors, rarity ratings, designer history and collector value ranges." />
+  <meta name="twitter:image" content="https://www.redlinepricing.com/RedlineImages/Sweet16Cars.png" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "1968 Sweet 16 Redlines — Hot Wheels First Edition",
+    "url": "https://www.redlinepricing.com/sweet16.html",
+    "description": "Guide to the sixteen original 1968 Hot Wheels Redlines: Spectraflame colors, rarity ratings and collector values.",
+    "isPartOf": { "@type": "WebSite", "name": "Redline Pricing Guide", "url": "https://www.redlinepricing.com/" },
+    "mainEntity": {
+      "@type": "ItemList",
+      "name": "The 1968 Sweet 16",
+      "numberOfItems": 16,
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Beatnik Bandit (#6217)" },
+        { "@type": "ListItem", "position": 2, "name": "Custom Barracuda (#6211)" },
+        { "@type": "ListItem", "position": 3, "name": "Custom Camaro (#6208)" },
+        { "@type": "ListItem", "position": 4, "name": "Custom Corvette (#6215)" },
+        { "@type": "ListItem", "position": 5, "name": "Custom Cougar (#6205)" },
+        { "@type": "ListItem", "position": 6, "name": "Custom El Dorado (#6218)" },
+        { "@type": "ListItem", "position": 7, "name": "Custom Firebird (#6212)" },
+        { "@type": "ListItem", "position": 8, "name": "Custom Fleetside (#6213)" },
+        { "@type": "ListItem", "position": 9, "name": "Custom Mustang (#6206)" },
+        { "@type": "ListItem", "position": 10, "name": "Custom T-Bird (#6207)" },
+        { "@type": "ListItem", "position": 11, "name": "Custom Volkswagen (#6220)" },
+        { "@type": "ListItem", "position": 12, "name": "Deora (#6210)" },
+        { "@type": "ListItem", "position": 13, "name": "Ford J-Car (#6214)" },
+        { "@type": "ListItem", "position": 14, "name": "Hot Heap (#6219)" },
+        { "@type": "ListItem", "position": 15, "name": "Python (#6216)" },
+        { "@type": "ListItem", "position": 16, "name": "Silhouette (#6209)" }
+      ]
+    }
+  }
+  </script>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-7TPZJBY0WN"></script>
   <script>
@@ -66,6 +111,21 @@
           <img src="assets/mattelcolors.jpg" alt="Mattel Spectraflame Color Guide" />
         </div>
       </div>
+    </div>
+
+    <!-- Collection Checklist -->
+    <div class="s16-checklist" id="checklistBar">
+      <div class="s16-checklist-top">
+        <h3>Your Sweet 16 Checklist</h3>
+        <span class="s16-checklist-count"><strong id="ownedCount">0</strong> of 16 owned</span>
+      </div>
+      <div class="s16-progress"><div class="s16-progress-fill" id="progressFill"></div></div>
+      <p class="s16-checklist-hint" id="checklistHint">Tap &ldquo;I own this&rdquo; on any car below to build your checklist &mdash; it&rsquo;s saved on this device.</p>
+      <div class="s16-checklist-cta" id="checklistCta" hidden>
+        <span id="checklistCtaText">Building a real collection? Log condition, purchase price &amp; market value for every car.</span>
+        <a href="https://www.etsy.com/listing/4487272371/hot-wheels-collection-tracker" target="_blank" rel="noopener" onclick="gtag('event','etsy_click',{item:'sweet16-checklist-cta'})">Get the Tracker &rarr;</a>
+      </div>
+      <button class="s16-checklist-reset" id="checklistReset" hidden>Reset checklist</button>
     </div>
 
     <div class="s16-grid">
@@ -567,6 +627,33 @@
       <p class="s16-legend-note">Values represent typical range for unpackaged cars in good condition. Mint-in-package examples command significant premiums. Rarity ratings reflect the most common color variants — rare colors within each casting can be significantly higher.</p>
     </div>
 
+    <!-- Value Estimator -->
+    <div class="s16-value-tool" id="valueTool">
+      <h3>What&rsquo;s My Car Worth?</h3>
+      <p class="s16-tool-intro">Pick a casting, Spectraflame color and condition for a ballpark collector value.</p>
+      <div class="s16-tool-controls">
+        <label class="s16-tool-field">
+          <span>Car</span>
+          <select id="vtCar"><option value="">Select a car&hellip;</option></select>
+        </label>
+        <label class="s16-tool-field">
+          <span>Color</span>
+          <select id="vtColor" disabled><option value="">Select a car first</option></select>
+        </label>
+        <label class="s16-tool-field">
+          <span>Condition</span>
+          <select id="vtCondition"><option value="">Select condition&hellip;</option></select>
+        </label>
+      </div>
+      <div class="s16-tool-result" id="vtResult" hidden>
+        <div class="s16-tool-result-label">Estimated value range</div>
+        <div class="s16-tool-range" id="vtRange"></div>
+        <p class="s16-tool-note" id="vtNote"></p>
+        <a class="s16-tool-cta" href="https://www.etsy.com/listing/4487272371/hot-wheels-collection-tracker" target="_blank" rel="noopener" onclick="gtag('event','etsy_click',{item:'sweet16-value-tool-cta'})">Track values like this across your whole collection &rarr;</a>
+      </div>
+      <p class="s16-tool-disclaimer">Estimates are rough guides for unpackaged cars based on typical recent sales. Actual prices vary widely with toning, wheel condition, base variations and market timing. Mint-in-package examples command significant premiums.</p>
+    </div>
+
     <div class="s16-cta-bar">
       <div class="s16-cta-text">
         <strong>Track your Sweet 16 collection</strong>
@@ -584,6 +671,7 @@
   </footer>
 
   <script src="assets/lightbox.js"></script>
+  <script src="assets/sweet16.js"></script>
   <script>
     const modal = document.getElementById('colorGuideModal');
     document.getElementById('openColorGuide').addEventListener('click', () => modal.classList.add('open'));

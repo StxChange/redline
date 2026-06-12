@@ -406,6 +406,207 @@
   border-radius: 8px;
 }
 
+/* Collection checklist */
+.s16-checklist {
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 32px;
+}
+.s16-checklist-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.s16-checklist h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #e6eef6;
+}
+.s16-checklist-count {
+  color: var(--muted);
+  font-size: 14px;
+}
+.s16-checklist-count strong {
+  color: var(--accent);
+  font-size: 20px;
+}
+.s16-progress {
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.07);
+  margin: 12px 0 10px;
+  overflow: hidden;
+}
+.s16-progress-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--accent), #f1641e);
+  border-radius: 999px;
+  transition: width .35s ease;
+}
+.s16-checklist-hint {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0;
+}
+.s16-checklist-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  font-size: 14px;
+  color: var(--muted);
+}
+.s16-checklist-cta strong { color: #e6eef6; }
+.s16-checklist-cta a {
+  color: #f1641e;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.s16-checklist-cta a:hover { text-decoration: underline; }
+.s16-checklist-reset {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 12px;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-top: 10px;
+  padding: 0;
+}
+.s16-checklist-reset:hover { color: #e6eef6; }
+
+/* "I own this" toggle on each card */
+.s16-own-btn {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  background: rgba(0,0,0,0.55);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: #e6eef6;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  letter-spacing: .02em;
+  transition: background .15s, border-color .15s;
+}
+.s16-own-btn:hover {
+  background: rgba(0,0,0,0.8);
+  border-color: rgba(255,255,255,0.4);
+}
+.s16-card.owned { border-color: rgba(34,197,94,0.4); }
+.s16-card.owned .s16-own-btn {
+  background: #15803d;
+  border-color: #22c55e;
+  color: #fff;
+}
+
+/* Value estimator */
+.s16-value-tool {
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin-bottom: 32px;
+}
+.s16-value-tool h3 {
+  margin: 0 0 6px;
+  font-size: 18px;
+  color: #e6eef6;
+}
+.s16-tool-intro {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 0 0 18px;
+}
+.s16-tool-controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.s16-tool-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.s16-tool-field span {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  font-weight: 700;
+}
+.s16-tool-field select {
+  background: #0b1220;
+  color: #e6eef6;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+  width: 100%;
+  cursor: pointer;
+}
+.s16-tool-field select:disabled { opacity: .45; cursor: default; }
+.s16-tool-field select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+.s16-tool-result {
+  background: rgba(225,29,72,0.06);
+  border: 1px solid rgba(225,29,72,0.25);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 14px;
+}
+.s16-tool-result-label {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin-bottom: 4px;
+}
+.s16-tool-range {
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--accent);
+  line-height: 1.2;
+}
+.s16-tool-note {
+  font-size: 13px;
+  color: #e6eef6;
+  margin: 10px 0 0;
+  line-height: 1.55;
+}
+.s16-tool-cta {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #f1641e;
+  text-decoration: none;
+}
+.s16-tool-cta:hover { text-decoration: underline; }
+.s16-tool-disclaimer {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.6;
+  opacity: .75;
+}
+
 /* Responsive */
 @media (max-width: 600px) {
   .s16-hero { padding: 48px 0 36px; }
