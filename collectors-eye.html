@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Collector's Eye — The Daily Redline Hot Wheels Quiz</title>
+  <meta name="description" content="A free daily quiz for Redline Hot Wheels collectors. Identify Sweet 16 castings, spot repaints and restored wheels, and build your streak — new puzzle every day." />
+  <link rel="canonical" href="https://www.redlinepricing.com/collectors-eye.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Redline Pricing Guide" />
+  <meta property="og:url" content="https://www.redlinepricing.com/collectors-eye.html" />
+  <meta property="og:title" content="Collector's Eye — The Daily Redline Hot Wheels Quiz" />
+  <meta property="og:description" content="Five questions a day on castings, colors and authentication. How sharp is your collector's eye?" />
+  <meta property="og:image" content="https://www.redlinepricing.com/RedlineImages/Sweet16Cars.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Collector's Eye — The Daily Redline Hot Wheels Quiz" />
+  <meta name="twitter:description" content="Five questions a day on castings, colors and authentication. How sharp is your collector's eye?" />
+  <meta name="twitter:image" content="https://www.redlinepricing.com/RedlineImages/Sweet16Cars.png" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Collector's Eye",
+    "applicationCategory": "GameApplication",
+    "operatingSystem": "Web browser",
+    "url": "https://www.redlinepricing.com/collectors-eye.html",
+    "description": "A free daily quiz for Redline Hot Wheels collectors: identify castings, know your colors, and spot restorations.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": { "@type": "WebSite", "name": "Redline Pricing Guide", "url": "https://www.redlinepricing.com/" }
+  }
+  </script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7TPZJBY0WN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7TPZJBY0WN');
+  </script>
+  <link rel="stylesheet" href="assets/style.css" />
+  <link rel="stylesheet" href="assets/sweet16.css" />
+  <link rel="stylesheet" href="assets/collectors-eye.css" />
+</head>
+<body>
+
+  <nav class="s16-nav">
+    <div class="container">
+      <a href="index.html" class="s16-nav-back">&#8592; Redline Pricing Guide</a>
+      <span class="s16-nav-title">Collector's Eye</span>
+    </div>
+  </nav>
+
+  <header class="s16-hero ce-hero">
+    <div class="s16-hero-bg"></div>
+    <div class="container s16-hero-content">
+      <div class="s16-year-badge">Daily Quiz</div>
+      <h1>Collector's Eye</h1>
+      <p class="s16-tagline">Five questions a day on castings, colors and authentication. Same puzzle for everyone — come back tomorrow for a new one.</p>
+    </div>
+  </header>
+
+  <main class="container s16-main ce-main">
+
+    <div class="ce-card" id="ceCard">
+      <div class="ce-meta">
+        <span class="ce-puzzle-num" id="cePuzzleNum"></span>
+        <span class="ce-progress" id="ceProgress"></span>
+      </div>
+      <div id="ceBody">
+        <noscript><p class="ce-noscript">Collector's Eye needs JavaScript to play. Please enable it and reload.</p></noscript>
+      </div>
+    </div>
+
+    <div class="ce-stats">
+      <div class="ce-stat"><span class="ce-stat-num" id="statPlayed">0</span><span class="ce-stat-label">Played</span></div>
+      <div class="ce-stat"><span class="ce-stat-num" id="statStreak">0</span><span class="ce-stat-label">Current Streak</span></div>
+      <div class="ce-stat"><span class="ce-stat-num" id="statBest">0</span><span class="ce-stat-label">Best Streak</span></div>
+    </div>
+
+    <div class="ce-about">
+      <h3>How it works</h3>
+      <p>Every day at midnight you get a fresh set of five questions drawn from real Redline collecting knowledge — the same five for every player. Questions cover the <a href="sweet16.html">1968 Sweet 16</a>, Spectraflame colors and rarity, and the authentication skills from our <a href="identify.html">Is It a Real Redline?</a> guide. Your streak is saved on this device.</p>
+    </div>
+
+    <div class="s16-cta-bar">
+      <div class="s16-cta-text">
+        <strong>Know your stuff? Prove it with your collection.</strong>
+        <span>Track every car you own — condition, purchase price and market value.</span>
+      </div>
+      <a class="s16-cta-btn" href="https://www.etsy.com/listing/4487272371/hot-wheels-collection-tracker" target="_blank" rel="noopener" onclick="gtag('event','etsy_click',{item:'collectors-eye-page-cta'})">Get the Tracker on Etsy &rarr;</a>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© Redline Pricing Guide — <a href="index.html">Back to Home</a> &nbsp;|&nbsp; Contact: <a href="mailto:eric@stxchange.com">eric@stxchange.com</a></p>
+    </div>
+  </footer>
+
+  <script src="assets/collectors-eye.js"></script>
+</body>
+</html>
