@@ -143,6 +143,119 @@ figcaption{margin-top:8px;color:var(--muted)}
   .s16-banner{flex-direction:column;align-items:flex-start}
 }
 
+/* Sweet 16 Track Racer — flashy game ad */
+.racer-ad{
+  position:relative;
+  display:block;
+  overflow:hidden;
+  border-radius:16px;
+  text-decoration:none;
+  color:#fff;
+  background:linear-gradient(120deg,#2a0e00 0%,#7a2d00 35%,#FF6A00 100%);
+  border:2px solid #FF8A1C;
+  box-shadow:0 0 45px rgba(255,106,0,0.35);
+  transition:transform .2s, box-shadow .2s;
+}
+.racer-ad:hover{
+  transform:scale(1.012);
+  box-shadow:0 0 70px rgba(255,106,0,0.55);
+  color:#fff;
+}
+.racer-ad-stripes{
+  position:absolute;
+  inset:-50%;
+  background:repeating-linear-gradient(115deg,
+    transparent 0 40px, rgba(255,255,255,0.06) 40px 56px,
+    transparent 56px 130px, rgba(0,114,206,0.20) 130px 148px);
+  animation:racerStripes 9s linear infinite;
+  pointer-events:none;
+}
+@keyframes racerStripes{
+  from{transform:translateX(0);}
+  to{transform:translateX(196px);}
+}
+.racer-ad-checker{
+  position:absolute;left:0;right:0;height:12px;
+  background:repeating-conic-gradient(#111 0% 25%, #f5f5f5 0% 50%) 0 0 / 24px 24px;
+  opacity:.85;
+}
+.racer-ad-checker.top{top:0;}
+.racer-ad-checker.bottom{bottom:0;}
+.racer-ad-content{
+  position:relative;
+  z-index:1;
+  padding:38px 32px 34px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  gap:12px;
+}
+.racer-ad-badge{
+  background:#0072CE;
+  color:#fff;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  padding:5px 16px;
+  border-radius:999px;
+  box-shadow:0 2px 12px rgba(0,114,206,0.5);
+}
+.racer-ad-title{
+  margin:0;
+  font-size:clamp(28px,5vw,46px);
+  font-weight:900;
+  letter-spacing:-.01em;
+  line-height:1.05;
+  text-shadow:0 3px 18px rgba(0,0,0,0.45);
+}
+.racer-ad-title em{
+  font-style:normal;
+  color:#ffd23f;
+}
+.racer-ad-sub{
+  margin:0;
+  font-size:16px;
+  max-width:560px;
+  line-height:1.5;
+  color:rgba(255,255,255,0.92);
+}
+.racer-ad-chips{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:8px;
+}
+.racer-ad-chips span{
+  background:rgba(0,0,0,0.35);
+  border:1px solid rgba(255,255,255,0.22);
+  border-radius:999px;
+  padding:5px 14px;
+  font-size:13px;
+  font-weight:600;
+}
+.racer-ad-btn{
+  margin-top:6px;
+  background:#fff;
+  color:#C94A00;
+  font-size:18px;
+  font-weight:900;
+  letter-spacing:.06em;
+  padding:14px 40px;
+  border-radius:12px;
+  animation:racerPulse 1.6s ease-in-out infinite;
+}
+@keyframes racerPulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,0.55);transform:scale(1);}
+  50%{box-shadow:0 0 0 12px rgba(255,255,255,0);transform:scale(1.045);}
+}
+@media(max-width:600px){
+  .racer-ad-content{padding:30px 18px 28px;}
+  .racer-ad-sub{font-size:14px;}
+  .racer-ad-btn{font-size:16px;padding:12px 30px;}
+}
+
 /* Etsy promo section */
 .etsy-card{
   background: linear-gradient(135deg, #1a0a00 0%, #2d1200 60%, #1a0a00 100%);
