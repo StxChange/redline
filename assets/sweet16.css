@@ -238,6 +238,32 @@
   padding-top: 10px;
 }
 
+/* eBay affiliate button (injected by ebay-affiliate.js) */
+.ebay-find-btn{
+  display:block;
+  margin-top:auto;
+  padding:9px 12px;
+  border-radius:8px;
+  text-align:center;
+  font-size:13px;
+  font-weight:600;
+  color:#e6eef6;
+  text-decoration:none;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.12);
+  transition:border-color .15s, background .15s;
+}
+.ebay-find-btn b{color:var(--accent);font-weight:700;}
+.ebay-find-btn:hover{
+  border-color:rgba(225,29,72,0.5);
+  background:rgba(225,29,72,0.08);
+}
+.affiliate-disclosure{
+  font-size:11px;
+  opacity:.7;
+  margin-top:6px;
+}
+
 /* Rarity legend */
 .s16-legend {
   background: var(--card);
