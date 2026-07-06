@@ -79,6 +79,11 @@
         </div>
         <div class="racer-ad-checker bottom" aria-hidden="true"></div>
       </a>
+      <button class="lb-banner" id="openLeaderboard">
+        <span class="lb-banner-left">&#127942; <strong>Check out the Leaderboard</strong> — top Sweet 16 Track Racer scores</span>
+        <span class="lb-banner-top" id="lbTopChip" hidden>&#128081; <b id="lbTopScore"></b> <span id="lbTopName"></span></span>
+        <span class="lb-banner-arrow">View Scores &rarr;</span>
+      </button>
     </section>
 
     <section id="sweet16-promo">
@@ -218,7 +223,87 @@
       <p>© Redline Pricing Guide — Contact: <a href="mailto:eric@stxchange.com">eric@stxchange.com</a></p>
     </div>
   </footer>
+  <!-- Leaderboard modal -->
+  <div class="lb-modal-overlay" id="lbModal">
+    <div class="lb-modal">
+      <div class="lb-modal-header">
+        <h3>&#127942; Track Racer Leaderboard</h3>
+        <button class="lb-modal-close" id="closeLeaderboard" aria-label="Close">&times;</button>
+      </div>
+      <div class="lb-modal-body">
+        <table class="lb-table">
+          <thead><tr><th>#</th><th>Name</th><th>Score</th><th>When</th></tr></thead>
+          <tbody id="lbRows"><tr><td colspan="4" class="lb-status">Loading&hellip;</td></tr></tbody>
+        </table>
+        <a class="lb-play-link" href="racer.html">Think you can beat them? Play now &rarr;</a>
+      </div>
+    </div>
+  </div>
+
   <script src="assets/lightbox.js"></script>
   <script src="assets/hero-video.js"></script>
+  <script>
+  (function(){
+    var modal = document.getElementById('lbModal');
+    var rows = document.getElementById('lbRows');
+    function statusRow(msg){
+      rows.innerHTML = '';
+      var tr = document.createElement('tr'), td = document.createElement('td');
+      td.colSpan = 4; td.className = 'lb-status'; td.textContent = msg;
+      tr.appendChild(td); rows.appendChild(tr);
+    }
+    function fmtWhen(iso){
+      if(!iso) return '—';
+      var d = new Date(iso);
+      if(isNaN(d)) return '—';
+      return d.toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'}) +
+             ' ' + d.toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'});
+    }
+    function load(){
+      statusRow('Loading…');
+      fetch('/api/leaderboard').then(function(r){
+        if(!r.ok) throw new Error('unavailable');
+        return r.json();
+      }).then(function(d){
+        var top = d.top || [];
+        if(!top.length){ statusRow('No scores yet — be the first!'); return; }
+        rows.innerHTML = '';
+        top.forEach(function(e, i){
+          var tr = document.createElement('tr');
+          [String(i+1), e.name, Number(e.score).toLocaleString(), fmtWhen(e.playedAt)].forEach(function(txt, c){
+            var td = document.createElement('td');
+            td.textContent = txt;
+            if(c===0) td.className = 'lb-rank';
+            if(c===2) td.className = 'lb-score';
+            tr.appendChild(td);
+          });
+          rows.appendChild(tr);
+        });
+      }).catch(function(){
+        statusRow('Leaderboard is unavailable right now — try again later.');
+      });
+    }
+    document.getElementById('openLeaderboard').addEventListener('click', function(){
+      modal.classList.add('open');
+      load();
+      if(typeof gtag==='function') gtag('event','leaderboard_view',{source:'index'});
+    });
+    document.getElementById('closeLeaderboard').addEventListener('click', function(){ modal.classList.remove('open'); });
+    modal.addEventListener('click', function(e){ if(e.target === modal) modal.classList.remove('open'); });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') modal.classList.remove('open'); });
+
+    // show the current #1 score in the banner on page load
+    fetch('/api/leaderboard').then(function(r){
+      if(!r.ok) throw new Error('unavailable');
+      return r.json();
+    }).then(function(d){
+      var best = (d.top || [])[0];
+      if(!best) return;
+      document.getElementById('lbTopScore').textContent = Number(best.score).toLocaleString();
+      document.getElementById('lbTopName').textContent = 'by ' + best.name;
+      document.getElementById('lbTopChip').hidden = false;
+    }).catch(function(){ /* API not deployed yet — banner just shows without the chip */ });
+  })();
+  </script>
 </body>
 </html>
