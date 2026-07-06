@@ -29,7 +29,7 @@
     #c{position:fixed;inset:0;display:block;}
 
     .screen{position:fixed;inset:0;z-index:20;display:flex;flex-direction:column;
-      align-items:center;justify-content:center;gap:22px;padding:24px;
+      align-items:center;justify-content:center;gap:22px;padding:24px;overflow-y:auto;
       background:radial-gradient(ellipse at 50% 0%,rgba(255,106,0,0.14) 0%,transparent 60%),
                  linear-gradient(180deg,#0a0f1e 0%,#0b1220 100%);}
     .screen.hidden{display:none;}
@@ -160,6 +160,25 @@
       #overstats{gap:20px;}
     }
 
+    /* Online leaderboard */
+    #lbwrap{width:min(420px,92vw);background:var(--card);border:1px solid rgba(255,255,255,0.08);
+      border-radius:14px;padding:18px;}
+    #lbwrap h3{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+      text-align:center;margin-bottom:10px;}
+    #lblist{list-style:none;display:flex;flex-direction:column;gap:4px;margin:0 0 14px;}
+    #lblist li{display:flex;align-items:center;gap:8px;font-size:14px;padding:5px 10px;
+      border-radius:7px;background:rgba(255,255,255,0.03);}
+    #lblist li .r{color:var(--track);font-weight:800;width:26px;flex-shrink:0;}
+    #lblist li .n{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    #lblist li .s{font-weight:800;font-variant-numeric:tabular-nums;}
+    #lbform{display:flex;flex-direction:column;gap:8px;}
+    #lbform input{background:#0f1826;border:1px solid rgba(255,255,255,0.14);border-radius:8px;
+      padding:10px 12px;color:#e6eef6;font:inherit;font-size:14px;}
+    #lbform input:focus{outline:none;border-color:var(--track);}
+    #lbform .btn{font-size:15px;padding:11px;}
+    .lbnote{font-size:11px;color:var(--muted);text-align:center;line-height:1.5;}
+    #lbmsg{text-align:center;font-weight:700;font-size:14px;color:var(--good);}
+
     /* Game over */
     #over .final{font-size:64px;font-weight:900;color:var(--track);font-variant-numeric:tabular-nums;line-height:1;}
     #over .reason{font-size:20px;font-weight:700;}
@@ -215,6 +234,17 @@
       <div><b id="stDist">0m</b>Distance</div>
       <div><b id="stTop">0</b>Top km/h</div>
       <div><b id="stCombo">x1</b>Best combo</div>
+    </div>
+    <div id="lbwrap" style="display:none">
+      <h3>&#127942; Global Top 10</h3>
+      <ol id="lblist"></ol>
+      <form id="lbform">
+        <input id="lbname" placeholder="Your name" maxlength="24" required autocomplete="name" />
+        <input id="lbemail" type="email" placeholder="Email (never shown publicly)" maxlength="254" required autocomplete="email" />
+        <button class="btn" type="submit" id="lbsubmit">Post My Score</button>
+        <p class="lbnote">Your email is used only to contact top-score winners. It never appears on the leaderboard.</p>
+      </form>
+      <div id="lbmsg"></div>
     </div>
     <div class="btnrow">
       <button class="btn" id="againbtn">Race Again</button>
@@ -606,6 +636,77 @@ function startRun(){
   if(typeof gtag==='function') gtag('event','racer_start',{car:selectedCar.name});
 }
 
+/* ============================== ONLINE LEADERBOARD ============================== */
+var lbSubmitted = false;
+function renderLB(list){
+  var ol = $('lblist'); ol.innerHTML = '';
+  if(!list.length){
+    var li0 = document.createElement('li');
+    li0.textContent = 'No scores yet — be the first!';
+    ol.appendChild(li0); return;
+  }
+  list.forEach(function(e, i){
+    var li = document.createElement('li');
+    var r = document.createElement('span'); r.className='r'; r.textContent = (i+1)+'.';
+    var n = document.createElement('span'); n.className='n'; n.textContent = e.name;
+    var s = document.createElement('span'); s.className='s'; s.textContent = Number(e.score).toLocaleString();
+    li.appendChild(r); li.appendChild(n); li.appendChild(s);
+    ol.appendChild(li);
+  });
+}
+function loadLeaderboard(){
+  fetch('/api/leaderboard').then(function(r){
+    if(!r.ok) throw new Error('api unavailable');
+    return r.json();
+  }).then(function(d){
+    $('lbwrap').style.display = '';
+    renderLB(d.top || []);
+  }).catch(function(){
+    $('lbwrap').style.display = 'none';   // API not reachable (e.g. local testing)
+  });
+}
+function prepLeaderboardForm(){
+  lbSubmitted = false;
+  $('lbmsg').textContent = '';
+  $('lbform').style.display = (score >= 1) ? '' : 'none';
+  try{
+    var saved = JSON.parse(localStorage.getItem('sweet16_racer_player') || 'null');
+    if(saved){ $('lbname').value = saved.name || ''; $('lbemail').value = saved.email || ''; }
+  }catch(e){}
+}
+$('lbform').addEventListener('submit', function(ev){
+  ev.preventDefault();
+  if(lbSubmitted) return;
+  var btn = $('lbsubmit');
+  btn.disabled = true; btn.textContent = 'Sending…';
+  var name = $('lbname').value.trim(), email = $('lbemail').value.trim();
+  fetch('/api/submit-score', {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({name:name, email:email, score:Math.round(score), car:selectedCar?selectedCar.name:''})
+  }).then(function(r){
+    return r.json().then(function(d){ return {ok: r.ok && d.ok, err: (d && d.error) || ''}; });
+  }).then(function(res){
+    if(res.ok){
+      lbSubmitted = true;
+      try{ localStorage.setItem('sweet16_racer_player', JSON.stringify({name:name, email:email})); }catch(e){}
+      $('lbform').style.display = 'none';
+      $('lbmsg').style.color = 'var(--good)';
+      $('lbmsg').textContent = "You're on the board!";
+      loadLeaderboard();
+      if(typeof gtag==='function') gtag('event','racer_score_submit',{score:Math.round(score)});
+    } else {
+      $('lbmsg').style.color = 'var(--accent)';
+      $('lbmsg').textContent = res.err || 'Could not submit — try again.';
+    }
+  }).catch(function(){
+    $('lbmsg').style.color = 'var(--accent)';
+    $('lbmsg').textContent = 'Could not submit — try again.';
+  }).finally(function(){
+    btn.disabled = false; btn.textContent = 'Post My Score';
+  });
+});
+
 function endRun(reason, isFinish){
   state = 'over';
   score = Math.round(score);
@@ -620,6 +721,8 @@ function endRun(reason, isFinish){
   $('stCombo').textContent = 'x' + bestCombo.toFixed(1);
   hud.classList.remove('on');
   $('over').classList.remove('hidden');
+  prepLeaderboardForm();
+  loadLeaderboard();
   if(typeof gtag==='function') gtag('event','racer_over',{score:score, finished:!!isFinish});
 }
 

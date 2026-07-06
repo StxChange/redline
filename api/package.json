@@ -1,0 +1,8 @@
+{
+  "name": "redline-racer-api",
+  "version": "1.0.0",
+  "description": "Leaderboard API for Sweet 16 Track Racer",
+  "dependencies": {
+    "@azure/data-tables": "^13.2.2"
+  }
+}

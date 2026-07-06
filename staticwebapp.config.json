@@ -1,14 +1,7 @@
 {
-  "routes": [
-    {
-      "route": "/*",
-      "serve": "/index.html",
-      "statusCode": 200
-    }
-  ],
   "navigationFallback": {
     "rewrite": "/index.html",
-    "exclude": ["*.{css,js,json,png,jpg,jpeg,gif,svg,ico,woff,woff2,ttf,eot,map}"]
+    "exclude": ["/api/*", "*.{html,css,js,json,png,jpg,jpeg,gif,svg,ico,webp,mp4,woff,woff2,ttf,eot,map,xlsx}"]
   },
   "responseOverrides": {
     "404": {
@@ -17,7 +10,7 @@
     }
   },
   "platform": {
-    "apiRuntime": "none"
+    "apiRuntime": "node:20"
   },
   "globalHeaders": {
     "Cache-Control": "no-cache, no-store, must-revalidate"
