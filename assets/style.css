@@ -365,6 +365,36 @@ figcaption{margin-top:8px;color:var(--muted)}
   font-size:14px;
 }
 .lb-play-link:hover{text-decoration:underline;}
+.lb-comment{font-size:12px;color:var(--muted);font-style:italic;margin-top:2px;line-height:1.4;}
+
+/* Racer comment wall */
+.rc-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  gap:14px;
+}
+.rc-card{
+  margin:0;
+  background:var(--card);
+  border:1px solid rgba(255,255,255,0.05);
+  border-left:3px solid #ff6a00;
+  border-radius:10px;
+  padding:16px 18px;
+}
+.rc-card blockquote{
+  margin:0 0 10px;
+  font-style:italic;
+  color:#e6eef6;
+  line-height:1.5;
+  font-size:14px;
+}
+.rc-card blockquote::before{content:'\201C';color:#ff6a00;font-weight:800;}
+.rc-card blockquote::after{content:'\201D';color:#ff6a00;font-weight:800;}
+.rc-card figcaption{
+  font-size:12px;
+  color:var(--muted);
+  font-weight:600;
+}
 
 /* Etsy promo section */
 .etsy-card{

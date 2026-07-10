@@ -166,15 +166,17 @@
     #lbwrap h3{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
       text-align:center;margin-bottom:10px;}
     #lblist{list-style:none;display:flex;flex-direction:column;gap:4px;margin:0 0 14px;}
-    #lblist li{display:flex;align-items:center;gap:8px;font-size:14px;padding:5px 10px;
+    #lblist li{display:flex;align-items:center;flex-wrap:wrap;gap:8px;font-size:14px;padding:5px 10px;
       border-radius:7px;background:rgba(255,255,255,0.03);}
     #lblist li .r{color:var(--track);font-weight:800;width:26px;flex-shrink:0;}
     #lblist li .n{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
     #lblist li .s{font-weight:800;font-variant-numeric:tabular-nums;}
+    #lblist li .c{width:100%;font-size:12px;color:var(--muted);font-style:italic;
+      padding-left:34px;line-height:1.4;}
     #lbform{display:flex;flex-direction:column;gap:8px;}
-    #lbform input{background:#0f1826;border:1px solid rgba(255,255,255,0.14);border-radius:8px;
-      padding:10px 12px;color:#e6eef6;font:inherit;font-size:14px;}
-    #lbform input:focus{outline:none;border-color:var(--track);}
+    #lbform input,#lbform textarea{background:#0f1826;border:1px solid rgba(255,255,255,0.14);
+      border-radius:8px;padding:10px 12px;color:#e6eef6;font:inherit;font-size:14px;resize:vertical;}
+    #lbform input:focus,#lbform textarea:focus{outline:none;border-color:var(--track);}
     #lbform .btn{font-size:15px;padding:11px;}
     .lbnote{font-size:11px;color:var(--muted);text-align:center;line-height:1.5;}
     #lbmsg{text-align:center;font-weight:700;font-size:14px;color:var(--good);}
@@ -241,8 +243,10 @@
       <form id="lbform">
         <input id="lbname" placeholder="Your name" maxlength="24" required autocomplete="name" />
         <input id="lbemail" type="email" placeholder="Email (never shown publicly)" maxlength="254" required autocomplete="email" />
+        <textarea id="lbcomment" placeholder="Shout-out to other racers (optional — appears on the site once approved)" maxlength="280" rows="2"></textarea>
+        <textarea id="lbprivate" placeholder="Private note to the game creator (optional — only he sees it)" maxlength="500" rows="2"></textarea>
         <button class="btn" type="submit" id="lbsubmit">Post My Score</button>
-        <p class="lbnote">Your email is used only to contact top-score winners. It never appears on the leaderboard.</p>
+        <p class="lbnote">Your email is used only to contact top-score winners and never appears on the leaderboard. Public comments are reviewed before they're shown.</p>
       </form>
       <div id="lbmsg"></div>
     </div>
@@ -651,6 +655,11 @@ function renderLB(list){
     var n = document.createElement('span'); n.className='n'; n.textContent = e.name;
     var s = document.createElement('span'); s.className='s'; s.textContent = Number(e.score).toLocaleString();
     li.appendChild(r); li.appendChild(n); li.appendChild(s);
+    if(e.comment){
+      var c = document.createElement('span'); c.className='c';
+      c.textContent = '“' + e.comment + '”';
+      li.appendChild(c);
+    }
     ol.appendChild(li);
   });
 }
@@ -669,6 +678,8 @@ function prepLeaderboardForm(){
   lbSubmitted = false;
   $('lbmsg').textContent = '';
   $('lbform').style.display = (score >= 1) ? '' : 'none';
+  $('lbcomment').value = '';
+  $('lbprivate').value = '';
   try{
     var saved = JSON.parse(localStorage.getItem('sweet16_racer_player') || 'null');
     if(saved){ $('lbname').value = saved.name || ''; $('lbemail').value = saved.email || ''; }
@@ -680,10 +691,15 @@ $('lbform').addEventListener('submit', function(ev){
   var btn = $('lbsubmit');
   btn.disabled = true; btn.textContent = 'Sending…';
   var name = $('lbname').value.trim(), email = $('lbemail').value.trim();
+  var publicComment = $('lbcomment').value.trim(), privateNote = $('lbprivate').value.trim();
   fetch('/api/submit-score', {
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({name:name, email:email, score:Math.round(score), car:selectedCar?selectedCar.name:''})
+    body: JSON.stringify({
+      name:name, email:email, score:Math.round(score),
+      car:selectedCar?selectedCar.name:'',
+      publicComment:publicComment, privateNote:privateNote
+    })
   }).then(function(r){
     return r.json().then(function(d){ return {ok: r.ok && d.ok, err: (d && d.error) || ''}; });
   }).then(function(res){
@@ -692,7 +708,9 @@ $('lbform').addEventListener('submit', function(ev){
       try{ localStorage.setItem('sweet16_racer_player', JSON.stringify({name:name, email:email})); }catch(e){}
       $('lbform').style.display = 'none';
       $('lbmsg').style.color = 'var(--good)';
-      $('lbmsg').textContent = "You're on the board!";
+      $('lbmsg').textContent = publicComment
+        ? "You're on the board! Your comment will appear once it's approved."
+        : "You're on the board!";
       loadLeaderboard();
       if(typeof gtag==='function') gtag('event','racer_score_submit',{score:Math.round(score)});
     } else {

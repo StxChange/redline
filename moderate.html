@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Moderation — Redline Pricing Guide</title>
+  <link rel="stylesheet" href="assets/style.css" />
+  <style>
+    .mod-wrap{max-width:760px;margin:0 auto;padding:28px;}
+    .mod-head{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:24px;}
+    .mod-head h1{font-size:26px;margin:0;}
+    .mod-key{display:flex;gap:8px;flex-wrap:wrap;}
+    .mod-key input{background:#0f1826;border:1px solid rgba(255,255,255,0.14);border-radius:8px;
+      padding:10px 12px;color:#e6eef6;font:inherit;font-size:14px;width:260px;}
+    .mod-key button{background:var(--accent);color:#fff;border:0;font:inherit;font-weight:700;
+      padding:10px 18px;border-radius:8px;cursor:pointer;}
+    .mod-key button:hover{opacity:.88;}
+    .mod-status{color:var(--muted);font-size:14px;margin:10px 0 22px;}
+    .mod-status.err{color:#ff5d7a;font-weight:600;}
+    .mod-section h2{font-size:16px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
+      border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:8px;margin:30px 0 14px;}
+    .mod-card{background:var(--card);border:1px solid rgba(255,255,255,0.06);border-radius:12px;
+      padding:16px 18px;margin-bottom:12px;}
+    .mod-card .who{font-weight:700;font-size:15px;}
+    .mod-card .who small{color:var(--muted);font-weight:400;margin-left:8px;}
+    .mod-card .meta{font-size:12px;color:var(--muted);margin:2px 0 10px;}
+    .mod-card .txt{font-size:15px;line-height:1.55;font-style:italic;color:#e6eef6;
+      border-left:3px solid #ff6a00;padding-left:12px;margin-bottom:12px;white-space:pre-wrap;}
+    .mod-card .txt.note{border-left-color:#0072CE;}
+    .mod-actions{display:flex;gap:10px;}
+    .mod-actions button{font:inherit;font-weight:700;font-size:14px;padding:9px 20px;
+      border-radius:8px;border:0;cursor:pointer;}
+    .mod-approve{background:#1d9e55;color:#fff;}
+    .mod-reject{background:rgba(255,255,255,0.08);color:#e6eef6;border:1px solid rgba(255,255,255,0.15) !important;}
+    .mod-actions button:hover{opacity:.85;}
+    .mod-actions button:disabled{opacity:.4;cursor:default;}
+    .mod-empty{color:var(--muted);font-size:14px;font-style:italic;padding:8px 0 18px;}
+  </style>
+</head>
+<body>
+  <div class="mod-wrap">
+    <div class="mod-head">
+      <h1>&#128737;&#65039; Comment Moderation</h1>
+      <div class="mod-key">
+        <input id="keyInput" type="password" placeholder="Admin key" autocomplete="off" />
+        <button id="loadBtn">Load</button>
+      </div>
+    </div>
+    <div class="mod-status" id="status">Enter your admin key to load pending comments and private notes.</div>
+
+    <div class="mod-section">
+      <h2>Pending public comments</h2>
+      <div id="pendingList"><div class="mod-empty">Nothing loaded yet.</div></div>
+    </div>
+
+    <div class="mod-section">
+      <h2>Private notes to you</h2>
+      <div id="notesList"><div class="mod-empty">Nothing loaded yet.</div></div>
+    </div>
+  </div>
+
+<script>
+(function(){
+  var keyInput = document.getElementById('keyInput'),
+      statusEl = document.getElementById('status'),
+      pendingList = document.getElementById('pendingList'),
+      notesList = document.getElementById('notesList');
+
+  keyInput.value = localStorage.getItem('redline_admin_key') || '';
+
+  function setStatus(msg, isErr){
+    statusEl.textContent = msg;
+    statusEl.className = 'mod-status' + (isErr ? ' err' : '');
+  }
+  function empty(el, msg){
+    el.innerHTML = '';
+    var d = document.createElement('div');
+    d.className = 'mod-empty'; d.textContent = msg;
+    el.appendChild(d);
+  }
+  function fmtWhen(iso){
+    if(!iso) return '';
+    var d = new Date(iso);
+    return isNaN(d) ? '' : d.toLocaleString();
+  }
+
+  function card(entry, isNote){
+    var c = document.createElement('div'); c.className = 'mod-card';
+    var who = document.createElement('div'); who.className = 'who';
+    who.textContent = entry.name;
+    var em = document.createElement('small'); em.textContent = entry.email || '';
+    who.appendChild(em);
+    var meta = document.createElement('div'); meta.className = 'meta';
+    meta.textContent = 'Score: ' + Number(entry.score).toLocaleString() + '   ·   ' + fmtWhen(entry.playedAt);
+    var txt = document.createElement('div'); txt.className = 'txt' + (isNote ? ' note' : '');
+    txt.textContent = isNote ? entry.note : entry.comment;
+    c.appendChild(who); c.appendChild(meta); c.appendChild(txt);
+    return c;
+  }
+
+  function act(rowKey, action, cardEl, btns){
+    btns.forEach(function(b){ b.disabled = true; });
+    fetch('/api/moderate', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ key: keyInput.value.trim(), rowKey: rowKey, action: action })
+    }).then(function(r){ return r.json(); }).then(function(d){
+      if(d.ok){
+        cardEl.style.opacity = '0.45';
+        cardEl.querySelector('.mod-actions').innerHTML =
+          action === 'approve' ? '&#9989; Approved — now live on the site' : '&#10060; Rejected';
+      } else {
+        setStatus(d.error || 'Action failed', true);
+        btns.forEach(function(b){ b.disabled = false; });
+      }
+    }).catch(function(){
+      setStatus('Network error — try again.', true);
+      btns.forEach(function(b){ b.disabled = false; });
+    });
+  }
+
+  function load(){
+    var key = keyInput.value.trim();
+    if(!key){ setStatus('Enter your admin key first.', true); return; }
+    setStatus('Loading…');
+    fetch('/api/moderate?key=' + encodeURIComponent(key)).then(function(r){
+      return r.json().then(function(d){ return { status: r.status, data: d }; });
+    }).then(function(res){
+      if(res.status === 401){ setStatus('Invalid admin key.', true); return; }
+      if(!res.data.ok){ setStatus(res.data.error || 'Failed to load.', true); return; }
+      localStorage.setItem('redline_admin_key', key);
+      var pending = res.data.pending || [], notes = res.data.notes || [];
+      setStatus(pending.length + ' comment(s) awaiting review · ' + notes.length + ' private note(s)');
+
+      if(!pending.length) empty(pendingList, 'No comments waiting for approval.');
+      else {
+        pendingList.innerHTML = '';
+        pending.forEach(function(p){
+          var c = card(p, false);
+          var actions = document.createElement('div'); actions.className = 'mod-actions';
+          var ok = document.createElement('button'); ok.className = 'mod-approve'; ok.textContent = 'Approve';
+          var no = document.createElement('button'); no.className = 'mod-reject'; no.textContent = 'Reject';
+          ok.addEventListener('click', function(){ act(p.rowKey, 'approve', c, [ok,no]); });
+          no.addEventListener('click', function(){ act(p.rowKey, 'reject', c, [ok,no]); });
+          actions.appendChild(ok); actions.appendChild(no);
+          c.appendChild(actions);
+          pendingList.appendChild(c);
+        });
+      }
+
+      if(!notes.length) empty(notesList, 'No private notes yet.');
+      else {
+        notesList.innerHTML = '';
+        notes.forEach(function(n){ notesList.appendChild(card(n, true)); });
+      }
+    }).catch(function(){
+      setStatus('Could not reach the API — is the site deployed?', true);
+    });
+  }
+
+  document.getElementById('loadBtn').addEventListener('click', load);
+  keyInput.addEventListener('keydown', function(e){ if(e.key === 'Enter') load(); });
+  if(keyInput.value) load();
+})();
+</script>
+</body>
+</html>

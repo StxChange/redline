@@ -11,6 +11,10 @@ module.exports = async function (context, req) {
     const email = String(b.email || "").trim().toLowerCase().slice(0, 254);
     const score = Math.round(Number(b.score));
     const car = String(b.car || "").slice(0, 32);
+    // optional comments: privateNote goes only to the site owner; publicComment
+    // is shown on the site only after the owner approves it
+    const privateNote = String(b.privateNote || "").trim().replace(/[<>]/g, "").slice(0, 500);
+    const publicComment = String(b.publicComment || "").trim().replace(/[<>]/g, "").slice(0, 280);
 
     if (name.length < 1) return bad(context, "Name is required");
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return bad(context, "A valid email is required");
@@ -29,6 +33,10 @@ module.exports = async function (context, req) {
       email,
       score,
       car,
+      privateNote,
+      publicComment,
+      commentApproved: false,
+      commentRejected: false,
       ip: String(req.headers["x-forwarded-for"] || "").split(",")[0].trim(),
       playedAt: new Date().toISOString()
     });

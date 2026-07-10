@@ -86,6 +86,11 @@
       </button>
     </section>
 
+    <section id="racer-comments" style="display:none">
+      <h2>&#127937; What racers are saying</h2>
+      <div class="rc-grid" id="rcGrid"></div>
+    </section>
+
     <section id="sweet16-promo">
       <a class="s16-banner" href="sweet16.html" onclick="gtag('event','page_view',{page:'sweet16'})">
         <div class="s16-banner-left">
@@ -272,7 +277,14 @@
           var tr = document.createElement('tr');
           [String(i+1), e.name, Number(e.score).toLocaleString(), fmtWhen(e.playedAt)].forEach(function(txt, c){
             var td = document.createElement('td');
-            td.textContent = txt;
+            if(c===1 && e.comment){
+              var nm = document.createElement('div'); nm.textContent = txt;
+              var cm = document.createElement('div'); cm.className = 'lb-comment';
+              cm.textContent = '“' + e.comment + '”';
+              td.appendChild(nm); td.appendChild(cm);
+            } else {
+              td.textContent = txt;
+            }
             if(c===0) td.className = 'lb-rank';
             if(c===2) td.className = 'lb-score';
             tr.appendChild(td);
@@ -303,6 +315,25 @@
       document.getElementById('lbTopName').textContent = 'by ' + best.name;
       document.getElementById('lbTopChip').hidden = false;
     }).catch(function(){ /* API not deployed yet — banner just shows without the chip */ });
+
+    // approved racer comments wall
+    fetch('/api/comments').then(function(r){
+      if(!r.ok) throw new Error('unavailable');
+      return r.json();
+    }).then(function(d){
+      var list = d.comments || [];
+      if(!list.length) return;
+      var grid = document.getElementById('rcGrid');
+      list.forEach(function(e){
+        var card = document.createElement('figure'); card.className = 'rc-card';
+        var q = document.createElement('blockquote'); q.textContent = e.comment;
+        var f = document.createElement('figcaption');
+        f.textContent = '— ' + e.name + ' · ' + Number(e.score).toLocaleString() + ' pts';
+        card.appendChild(q); card.appendChild(f);
+        grid.appendChild(card);
+      });
+      document.getElementById('racer-comments').style.display = '';
+    }).catch(function(){ /* keep section hidden */ });
   })();
   </script>
 </body>

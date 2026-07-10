@@ -17,7 +17,13 @@ module.exports = async function (context, req) {
       const key = String(e.email || "").toLowerCase();
       if (!key || !seen.has(key)) {
         seen.add(key);
-        top.push({ name: e.name, score: e.score, car: e.car || "", playedAt: e.playedAt || "" });
+        top.push({
+          name: e.name,
+          score: e.score,
+          car: e.car || "",
+          playedAt: e.playedAt || "",
+          comment: (e.commentApproved && e.publicComment) ? e.publicComment : ""
+        });
       }
       if (top.length >= 10 || scanned >= 500) break;
     }
