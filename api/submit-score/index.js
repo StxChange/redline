@@ -1,4 +1,5 @@
 const { getTableClient, PARTITION, MAX_SCORE } = require("../shared/tables");
+const { cleanIp, lookupLocation } = require("../shared/geo");
 
 function bad(context, msg) {
   context.res = { status: 400, body: { ok: false, error: msg } };
@@ -21,6 +22,8 @@ module.exports = async function (context, req) {
     if (!Number.isFinite(score) || score < 1 || score > MAX_SCORE) return bad(context, "Invalid score");
 
     const client = await getTableClient();
+    const ip = cleanIp(req.headers);
+    const location = await lookupLocation(ip);
     // RowKey trick: inverted zero-padded score sorts the table highest-score-first,
     // so the leaderboard query can just read the first rows in natural order.
     const inverted = String(MAX_SCORE - score).padStart(6, "0");
@@ -37,7 +40,8 @@ module.exports = async function (context, req) {
       publicComment,
       commentApproved: false,
       commentRejected: false,
-      ip: String(req.headers["x-forwarded-for"] || "").split(",")[0].trim(),
+      ip,
+      location,
       playedAt: new Date().toISOString()
     });
 

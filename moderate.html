@@ -75,10 +75,10 @@
       <div class="mod-tablewrap">
         <table class="mod-table">
           <thead>
-            <tr><th>When</th><th>Name</th><th>Email</th><th>Score</th><th>Car</th><th>Public comment</th><th>Private note</th></tr>
+            <tr><th>When</th><th>Name</th><th>Email</th><th>Score</th><th>Car</th><th>Public comment</th><th>Private note</th><th>IP</th><th>Location</th></tr>
           </thead>
           <tbody id="allRows">
-            <tr><td colspan="7" class="mod-empty">Nothing loaded yet.</td></tr>
+            <tr><td colspan="9" class="mod-empty">Nothing loaded yet.</td></tr>
           </tbody>
         </table>
       </div>
@@ -89,10 +89,10 @@
       <div class="mod-tablewrap">
         <table class="mod-table">
           <thead>
-            <tr><th>When</th><th>Score</th><th>Car</th><th>Distance</th><th>Time</th><th>Result</th><th>Device</th><th>IP</th></tr>
+            <tr><th>When</th><th>Score</th><th>Car</th><th>Distance</th><th>Time</th><th>Result</th><th>Device</th><th>IP</th><th>Location</th></tr>
           </thead>
           <tbody id="runRows">
-            <tr><td colspan="8" class="mod-empty">Nothing loaded yet.</td></tr>
+            <tr><td colspan="9" class="mod-empty">Nothing loaded yet.</td></tr>
           </tbody>
         </table>
       </div>
@@ -155,7 +155,7 @@
     allRows.innerHTML = '';
     if(!list.length){
       var tr0 = document.createElement('tr'), td0 = document.createElement('td');
-      td0.colSpan = 7; td0.className = 'mod-empty'; td0.textContent = 'No submissions yet.';
+      td0.colSpan = 9; td0.className = 'mod-empty'; td0.textContent = 'No submissions yet.';
       tr0.appendChild(td0); allRows.appendChild(tr0);
       return;
     }
@@ -171,7 +171,9 @@
         : ['',''];
       var pub = commentCell(e.publicComment, status[0], status[1]);
       var priv = commentCell(e.privateNote, '', '');
-      [when,name,email,score,car,pub,priv].forEach(function(td){ tr.appendChild(td); });
+      var ip = document.createElement('td'); ip.className = 'nw'; ip.textContent = e.ip || '—';
+      var loc = document.createElement('td'); loc.className = 'nw'; loc.textContent = e.location || '—';
+      [when,name,email,score,car,pub,priv,ip,loc].forEach(function(td){ tr.appendChild(td); });
       allRows.appendChild(tr);
     });
   }
@@ -238,7 +240,7 @@
     runRows.innerHTML = '';
     if(!list.length){
       var tr0 = document.createElement('tr'), td0 = document.createElement('td');
-      td0.colSpan = 8; td0.className = 'mod-empty'; td0.textContent = 'No runs logged yet.';
+      td0.colSpan = 9; td0.className = 'mod-empty'; td0.textContent = 'No runs logged yet.';
       tr0.appendChild(td0); runRows.appendChild(tr0);
       return;
     }
@@ -252,7 +254,8 @@
         r.duration + 's',
         r.finished ? '🏁 Finished' : (r.endReason || '—'),
         r.mobile ? '📱 Mobile' : '💻 Desktop',
-        r.ip || ''
+        r.ip || '—',
+        r.location || '—'
       ];
       cells.forEach(function(txt, i){
         var td = document.createElement('td');

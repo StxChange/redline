@@ -38,6 +38,8 @@ module.exports = async function (context, req) {
           privateNote: e.privateNote || "",
           commentApproved: !!e.commentApproved,
           commentRejected: !!e.commentRejected,
+          ip: e.ip || "",
+          location: e.location || "",
           playedAt: e.playedAt || ""
         };
         all.push(row);
@@ -60,7 +62,7 @@ module.exports = async function (context, req) {
           score: r.score, car: r.car || "", distance: r.distance || 0,
           duration: r.duration || 0, finished: !!r.finished,
           endReason: r.endReason || "", mobile: !!r.mobile,
-          ip: r.ip || "", playedAt: r.playedAt || ""
+          ip: r.ip || "", location: r.location || "", playedAt: r.playedAt || ""
         });
         if (runs.length >= 100) break;
       }
