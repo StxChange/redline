@@ -83,6 +83,20 @@
         </table>
       </div>
     </div>
+
+    <div class="mod-section">
+      <h2>Recent runs — every game played (anonymous)</h2>
+      <div class="mod-tablewrap">
+        <table class="mod-table">
+          <thead>
+            <tr><th>When</th><th>Score</th><th>Car</th><th>Distance</th><th>Time</th><th>Result</th><th>Device</th><th>IP</th></tr>
+          </thead>
+          <tbody id="runRows">
+            <tr><td colspan="8" class="mod-empty">Nothing loaded yet.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 
 <script>
@@ -213,8 +227,40 @@
       }
 
       renderAll(all);
+      renderRuns(res.data.runs || []);
     }).catch(function(){
       setStatus('Could not reach the API — is the site deployed?', true);
+    });
+  }
+
+  function renderRuns(list){
+    var runRows = document.getElementById('runRows');
+    runRows.innerHTML = '';
+    if(!list.length){
+      var tr0 = document.createElement('tr'), td0 = document.createElement('td');
+      td0.colSpan = 8; td0.className = 'mod-empty'; td0.textContent = 'No runs logged yet.';
+      tr0.appendChild(td0); runRows.appendChild(tr0);
+      return;
+    }
+    list.forEach(function(r){
+      var tr = document.createElement('tr');
+      var cells = [
+        fmtWhen(r.playedAt),
+        Number(r.score).toLocaleString(),
+        r.car || '—',
+        Math.round(r.distance) + 'm',
+        r.duration + 's',
+        r.finished ? '🏁 Finished' : (r.endReason || '—'),
+        r.mobile ? '📱 Mobile' : '💻 Desktop',
+        r.ip || ''
+      ];
+      cells.forEach(function(txt, i){
+        var td = document.createElement('td');
+        td.className = i===1 ? 'score' : 'nw';
+        td.textContent = txt;
+        tr.appendChild(td);
+      });
+      runRows.appendChild(tr);
     });
   }
 

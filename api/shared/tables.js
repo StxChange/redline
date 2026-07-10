@@ -21,4 +21,4 @@ function getTableClient() {
   return clientPromise;
 }
 
-module.exports = { getTableClient, PARTITION, MAX_SCORE };
+module.exports = { getTableClient, PARTITION, RUN_PARTITION: "RUNLOG", MAX_SCORE };

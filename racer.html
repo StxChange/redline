@@ -741,6 +741,21 @@ function endRun(reason, isFinish){
   $('over').classList.remove('hidden');
   prepLeaderboardForm();
   loadLeaderboard();
+  // anonymous run log — fires for every run, leaderboard post or not
+  try{
+    fetch('/api/log-run', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        score: score,
+        car: selectedCar ? selectedCar.name : '',
+        distance: Math.round(S),
+        duration: Math.round((ROUND_TIME - timeLeft)*10)/10,
+        finished: !!isFinish,
+        reason: reason,
+        mobile: IS_TOUCH
+      })
+    }).catch(function(){});
+  }catch(e){}
   if(typeof gtag==='function') gtag('event','racer_over',{score:score, finished:!!isFinish});
 }
 

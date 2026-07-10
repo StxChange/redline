@@ -1,4 +1,4 @@
-const { getTableClient, PARTITION } = require("../shared/tables");
+const { getTableClient, PARTITION, RUN_PARTITION } = require("../shared/tables");
 
 /* Owner-only moderation endpoint, protected by the ADMIN_KEY app setting.
    GET  /api/moderate?key=...            -> pending public comments + private notes
@@ -49,10 +49,26 @@ module.exports = async function (context, req) {
       const newestFirst = (a, b) => String(b.playedAt).localeCompare(String(a.playedAt));
       pending.sort(newestFirst);
       all.sort(newestFirst);
+
+      // anonymous run log (separate partition, rowKeys already newest-first)
+      const runs = [];
+      const runIter = client.listEntities({
+        queryOptions: { filter: `PartitionKey eq '${RUN_PARTITION}'` }
+      });
+      for await (const r of runIter) {
+        runs.push({
+          score: r.score, car: r.car || "", distance: r.distance || 0,
+          duration: r.duration || 0, finished: !!r.finished,
+          endReason: r.endReason || "", mobile: !!r.mobile,
+          ip: r.ip || "", playedAt: r.playedAt || ""
+        });
+        if (runs.length >= 100) break;
+      }
+
       context.res = {
         status: 200,
         headers: { "Cache-Control": "no-store" },
-        body: { ok: true, pending, all: all.slice(0, 300) }
+        body: { ok: true, pending, all: all.slice(0, 300), runs }
       };
       return;
     }
