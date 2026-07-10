@@ -21,34 +21,38 @@ module.exports = async function (context, req) {
     const client = await getTableClient();
 
     if (req.method === "GET") {
-      const pending = [], notes = [];
+      const pending = [], all = [];
       let scanned = 0;
       const iter = client.listEntities({
         queryOptions: { filter: `PartitionKey eq '${PARTITION}'` }
       });
       for await (const e of iter) {
         scanned++;
-        if (e.publicComment && !e.commentApproved && !e.commentRejected) {
-          pending.push({
-            rowKey: e.rowKey, name: e.name, email: e.email, score: e.score,
-            comment: e.publicComment, playedAt: e.playedAt || ""
-          });
-        }
-        if (e.privateNote) {
-          notes.push({
-            name: e.name, email: e.email, score: e.score,
-            note: e.privateNote, playedAt: e.playedAt || ""
-          });
+        const row = {
+          rowKey: e.rowKey,
+          name: e.name,
+          email: e.email,
+          score: e.score,
+          car: e.car || "",
+          publicComment: e.publicComment || "",
+          privateNote: e.privateNote || "",
+          commentApproved: !!e.commentApproved,
+          commentRejected: !!e.commentRejected,
+          playedAt: e.playedAt || ""
+        };
+        all.push(row);
+        if (row.publicComment && !row.commentApproved && !row.commentRejected) {
+          pending.push(row);
         }
         if (scanned >= 2000) break;
       }
       const newestFirst = (a, b) => String(b.playedAt).localeCompare(String(a.playedAt));
       pending.sort(newestFirst);
-      notes.sort(newestFirst);
+      all.sort(newestFirst);
       context.res = {
         status: 200,
         headers: { "Cache-Control": "no-store" },
-        body: { ok: true, pending, notes: notes.slice(0, 100) }
+        body: { ok: true, pending, all: all.slice(0, 300) }
       };
       return;
     }

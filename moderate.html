@@ -36,6 +36,22 @@
     .mod-actions button:hover{opacity:.85;}
     .mod-actions button:disabled{opacity:.4;cursor:default;}
     .mod-empty{color:var(--muted);font-size:14px;font-style:italic;padding:8px 0 18px;}
+    .mod-wrap{max-width:1100px;}
+    .mod-tablewrap{overflow-x:auto;border:1px solid rgba(255,255,255,0.06);border-radius:12px;}
+    .mod-table{width:100%;border-collapse:collapse;font-size:13px;min-width:900px;}
+    .mod-table th{
+      text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.06em;
+      color:var(--muted);padding:10px 12px;background:rgba(255,255,255,0.03);
+      border-bottom:1px solid rgba(255,255,255,0.08);white-space:nowrap;}
+    .mod-table td{padding:9px 12px;border-bottom:1px solid rgba(255,255,255,0.04);vertical-align:top;}
+    .mod-table td.nw{white-space:nowrap;}
+    .mod-table td.score{font-weight:800;font-variant-numeric:tabular-nums;}
+    .mod-table td.cmt{max-width:260px;line-height:1.45;}
+    .mod-badge{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.05em;
+      padding:2px 8px;border-radius:999px;margin-bottom:4px;text-transform:uppercase;}
+    .mod-badge.ok{background:rgba(29,158,85,0.2);color:#4ade80;}
+    .mod-badge.wait{background:rgba(255,210,63,0.15);color:#ffd23f;}
+    .mod-badge.no{background:rgba(225,29,72,0.18);color:#ff5d7a;}
   </style>
 </head>
 <body>
@@ -55,8 +71,17 @@
     </div>
 
     <div class="mod-section">
-      <h2>Private notes to you</h2>
-      <div id="notesList"><div class="mod-empty">Nothing loaded yet.</div></div>
+      <h2>All submissions</h2>
+      <div class="mod-tablewrap">
+        <table class="mod-table">
+          <thead>
+            <tr><th>When</th><th>Name</th><th>Email</th><th>Score</th><th>Car</th><th>Public comment</th><th>Private note</th></tr>
+          </thead>
+          <tbody id="allRows">
+            <tr><td colspan="7" class="mod-empty">Nothing loaded yet.</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 
@@ -65,7 +90,7 @@
   var keyInput = document.getElementById('keyInput'),
       statusEl = document.getElementById('status'),
       pendingList = document.getElementById('pendingList'),
-      notesList = document.getElementById('notesList');
+      allRows = document.getElementById('allRows');
 
   keyInput.value = localStorage.getItem('redline_admin_key') || '';
 
@@ -85,7 +110,7 @@
     return isNaN(d) ? '' : d.toLocaleString();
   }
 
-  function card(entry, isNote){
+  function card(entry){
     var c = document.createElement('div'); c.className = 'mod-card';
     var who = document.createElement('div'); who.className = 'who';
     who.textContent = entry.name;
@@ -93,10 +118,48 @@
     who.appendChild(em);
     var meta = document.createElement('div'); meta.className = 'meta';
     meta.textContent = 'Score: ' + Number(entry.score).toLocaleString() + '   ·   ' + fmtWhen(entry.playedAt);
-    var txt = document.createElement('div'); txt.className = 'txt' + (isNote ? ' note' : '');
-    txt.textContent = isNote ? entry.note : entry.comment;
+    var txt = document.createElement('div'); txt.className = 'txt';
+    txt.textContent = entry.publicComment;
     c.appendChild(who); c.appendChild(meta); c.appendChild(txt);
     return c;
+  }
+
+  function commentCell(text, badgeText, badgeCls){
+    var td = document.createElement('td'); td.className = 'cmt';
+    if(!text){ td.textContent = '—'; return td; }
+    if(badgeText){
+      var b = document.createElement('span');
+      b.className = 'mod-badge ' + badgeCls; b.textContent = badgeText;
+      td.appendChild(b);
+      td.appendChild(document.createElement('br'));
+    }
+    td.appendChild(document.createTextNode(text));
+    return td;
+  }
+
+  function renderAll(list){
+    allRows.innerHTML = '';
+    if(!list.length){
+      var tr0 = document.createElement('tr'), td0 = document.createElement('td');
+      td0.colSpan = 7; td0.className = 'mod-empty'; td0.textContent = 'No submissions yet.';
+      tr0.appendChild(td0); allRows.appendChild(tr0);
+      return;
+    }
+    list.forEach(function(e){
+      var tr = document.createElement('tr');
+      var when = document.createElement('td'); when.className = 'nw'; when.textContent = fmtWhen(e.playedAt);
+      var name = document.createElement('td'); name.className = 'nw'; name.textContent = e.name;
+      var email = document.createElement('td'); email.className = 'nw'; email.textContent = e.email || '';
+      var score = document.createElement('td'); score.className = 'score'; score.textContent = Number(e.score).toLocaleString();
+      var car = document.createElement('td'); car.className = 'nw'; car.textContent = e.car || '—';
+      var status = e.publicComment
+        ? (e.commentApproved ? ['LIVE','ok'] : (e.commentRejected ? ['REJECTED','no'] : ['PENDING','wait']))
+        : ['',''];
+      var pub = commentCell(e.publicComment, status[0], status[1]);
+      var priv = commentCell(e.privateNote, '', '');
+      [when,name,email,score,car,pub,priv].forEach(function(td){ tr.appendChild(td); });
+      allRows.appendChild(tr);
+    });
   }
 
   function act(rowKey, action, cardEl, btns){
@@ -130,14 +193,14 @@
       if(res.status === 401){ setStatus('Invalid admin key.', true); return; }
       if(!res.data.ok){ setStatus(res.data.error || 'Failed to load.', true); return; }
       localStorage.setItem('redline_admin_key', key);
-      var pending = res.data.pending || [], notes = res.data.notes || [];
-      setStatus(pending.length + ' comment(s) awaiting review · ' + notes.length + ' private note(s)');
+      var pending = res.data.pending || [], all = res.data.all || [];
+      setStatus(all.length + ' total submission(s) · ' + pending.length + ' comment(s) awaiting review');
 
       if(!pending.length) empty(pendingList, 'No comments waiting for approval.');
       else {
         pendingList.innerHTML = '';
         pending.forEach(function(p){
-          var c = card(p, false);
+          var c = card(p);
           var actions = document.createElement('div'); actions.className = 'mod-actions';
           var ok = document.createElement('button'); ok.className = 'mod-approve'; ok.textContent = 'Approve';
           var no = document.createElement('button'); no.className = 'mod-reject'; no.textContent = 'Reject';
@@ -149,11 +212,7 @@
         });
       }
 
-      if(!notes.length) empty(notesList, 'No private notes yet.');
-      else {
-        notesList.innerHTML = '';
-        notes.forEach(function(n){ notesList.appendChild(card(n, true)); });
-      }
+      renderAll(all);
     }).catch(function(){
       setStatus('Could not reach the API — is the site deployed?', true);
     });
