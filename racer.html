@@ -989,7 +989,12 @@ function updateHUD(){
 }
 
 /* ============================== INPUT ============================== */
+function isTyping(e){
+  var t = e.target;
+  return t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA');
+}
 window.addEventListener('keydown', function(e){
+  if(isTyping(e)) return;   // don't hijack keys while filling in forms
   var k = e.key.toLowerCase();
   keys[k] = true;
   if(['arrowup','arrowdown','arrowleft','arrowright',' '].indexOf(k) !== -1) e.preventDefault();
@@ -999,7 +1004,10 @@ window.addEventListener('keydown', function(e){
     if(k==='3') pickCard(2);
   }
 });
-window.addEventListener('keyup', function(e){ keys[e.key.toLowerCase()] = false; });
+window.addEventListener('keyup', function(e){
+  if(isTyping(e)) return;
+  keys[e.key.toLowerCase()] = false;
+});
 
 /* Touch controls */
 if(IS_TOUCH){
