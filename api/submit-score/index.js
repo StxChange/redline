@@ -16,6 +16,9 @@ module.exports = async function (context, req) {
     // is shown on the site only after the owner approves it
     const privateNote = String(b.privateNote || "").trim().replace(/[<>]/g, "").slice(0, 500);
     const publicComment = String(b.publicComment || "").trim().replace(/[<>]/g, "").slice(0, 280);
+    // run telemetry (same clamping as log-run)
+    const distance = Math.round(Number(b.distance));
+    const duration = Math.round(Number(b.duration) * 10) / 10;
 
     if (name.length < 1) return bad(context, "Name is required");
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return bad(context, "A valid email is required");
@@ -40,6 +43,11 @@ module.exports = async function (context, req) {
       publicComment,
       commentApproved: false,
       commentRejected: false,
+      distance: Number.isFinite(distance) ? Math.max(0, Math.min(distance, 99999)) : 0,
+      duration: Number.isFinite(duration) ? Math.max(0, Math.min(duration, 60)) : 0,
+      finished: !!b.finished,
+      endReason: String(b.reason || "").slice(0, 60),
+      mobile: !!b.mobile,
       ip,
       location,
       playedAt: new Date().toISOString()

@@ -642,6 +642,7 @@ function startRun(){
 
 /* ============================== ONLINE LEADERBOARD ============================== */
 var lbSubmitted = false;
+var lastRunFinished = false, lastRunReason = '';
 function renderLB(list){
   var ol = $('lblist'); ol.innerHTML = '';
   if(!list.length){
@@ -698,7 +699,12 @@ $('lbform').addEventListener('submit', function(ev){
     body: JSON.stringify({
       name:name, email:email, score:Math.round(score),
       car:selectedCar?selectedCar.name:'',
-      publicComment:publicComment, privateNote:privateNote
+      publicComment:publicComment, privateNote:privateNote,
+      distance: Math.round(S),
+      duration: Math.round((ROUND_TIME - timeLeft)*10)/10,
+      finished: lastRunFinished,
+      reason: lastRunReason,
+      mobile: IS_TOUCH
     })
   }).then(function(r){
     return r.json().then(function(d){ return {ok: r.ok && d.ok, err: (d && d.error) || ''}; });
@@ -727,6 +733,8 @@ $('lbform').addEventListener('submit', function(ev){
 
 function endRun(reason, isFinish){
   state = 'over';
+  lastRunFinished = !!isFinish;
+  lastRunReason = reason;
   score = Math.round(score);
   var best = parseInt(localStorage.getItem('sweet16_racer_best')||'0',10);
   if(score > best){ localStorage.setItem('sweet16_racer_best', String(score)); best = score; }

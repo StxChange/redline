@@ -38,6 +38,12 @@ module.exports = async function (context, req) {
           privateNote: e.privateNote || "",
           commentApproved: !!e.commentApproved,
           commentRejected: !!e.commentRejected,
+          distance: e.distance,
+          duration: e.duration,
+          finished: !!e.finished,
+          endReason: e.endReason || "",
+          mobile: !!e.mobile,
+          hasTelemetry: e.distance !== undefined,
           ip: e.ip || "",
           location: e.location || "",
           playedAt: e.playedAt || ""
