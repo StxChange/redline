@@ -43,7 +43,7 @@ jobs:
           # Static site is deployed as-is; the api folder is built (npm install) by the deploy action
           app_location: "/" # root directory
           api_location: "api" # leaderboard Azure Functions
-          output_location: "." # pre-built files in current location
+          output_location: "" # no build output folder — deploy app_location as-is
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
