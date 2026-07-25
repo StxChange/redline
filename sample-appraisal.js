@@ -148,14 +148,14 @@
       reference: "https://www.redlinepricing.com/sweet16.html"
     },
     {
-      id: "RL-14", name: "Custom Corvette", year: "1968",
+      id: "RL-14", name: "Pontiac GTO", year: "1967",
       series: "Original Sweet 16", color: "Spectraflame lime / antifreeze",
       origin: "U.S./Hong Kong variation — base required", qty: 1,
-      low: 400, high: 800, rarity: "Sweet 16; strong color appeal",
-      confidence: "High", image: "collection/custom-corvette.png",
-      note: "The right-hand car in the final photo shows the C3 Corvette profile and side gills; blister and button are partly obscured.",
+      low: 400, high: 800, rarity: "Strong color appeal",
+      confidence: "High", image: "collection/pontiac-gto.png",
+      note: "The right-hand car in the final photo shows Pontiac GTO profile and side gills; blister and button are partly obscured.",
       verify: "Provide an unobstructed full-card photo plus base, interior, hood and seal close-ups.",
-      query: "1968 Hot Wheels Redline Custom Corvette antifreeze lime blister pack button",
+      query: "1967 Hot Wheels Redline GTO antifreeze lime blister pack button",
       reference: "https://www.redlinepricing.com/sweet16.html"
     },
     {
