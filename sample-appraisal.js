@@ -92,15 +92,15 @@
       reference: "https://www.redlinepricing.com/sweet16.html"
     },
     {
-      id: "RL-09", name: "Boss Hoss", year: "1970", series: "The Spoilers",
+      id: "RL-09", name: "Light My Firebird", year: "1970", series: "The Spoilers",
       color: "Spectraflame green with No. 1 graphics", origin: "U.S.A.",
       qty: 1, low: 250, high: 450,
       rarity: "Uncommon carded Spoilers issue", confidence: "High",
-      image: "collection/boss-hoss.jpeg",
-      note: "Mustang-based Spoilers casting with blown engine, rear airfoil and No. 1 graphics. Matching button appears present.",
+      image: "collection/light-my-firebird.jpeg",
+      note: "Firebird-based Spoilers casting with blown engine, rear airfoil and No. 1 graphics. Matching button appears present.",
       verify: "Confirm engine, airfoil, decals, button match and blister originality.",
-      query: "1970 Hot Wheels Redline Boss Hoss green Spoilers blister pack button",
-      reference: "https://redlinepriceguide.com/redline.php?car=1970+Boss+Hoss+Club+Car&yearsearch=n"
+      query: "1970 Hot Wheels Redline Light My Firebird green Spoilers blister pack button",
+      reference: "https://redlinepriceguide.com/redline.php?car=1970+Light+My+Firebird&yearsearch=n"
     },
     {
       id: "RL-10", name: "Classic Nomad", year: "1970",
