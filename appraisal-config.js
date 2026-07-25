@@ -6,7 +6,7 @@ window.REDLINE_APPRAISAL_CONFIG = {
   contactEmail: "eric@stxchange.com",
   sampleReportUrl: "sample-appraisal.html",
   paypalLinks: {
-    quick: "",
+    quick: "https://www.paypal.com/ncp/payment/Y5YT2HMDC9X4U",
     collection: "",
     interactive: "",
     large: ""
