@@ -14,15 +14,15 @@
       reference: "https://onlineredlineguide.com/69/69_turbofire/69_turbofire.html"
     },
     {
-      id: "RL-02", name: "Lola GT70", year: "1969",
+      id: "RL-02", name: "Ford Mark IV", year: "1969",
       series: "Grand Prix Series", color: "Spectraflame red",
       origin: "U.S./Hong Kong variation — base required", qty: 1,
       low: 225, high: 350, rarity: "Popular Grand Prix casting",
-      confidence: "Medium", image: "collection/lola-gt70.png",
-      note: "Photo identification is consistent with a red Lola GT70 on the green Grand Prix card with matching button.",
+      confidence: "Medium", image: "collection/ford-mark-iv.png",
+      note: "Photo identification is consistent with a red Ford Mark IV on the green Grand Prix card with matching button.",
       verify: "Confirm the button text, base country and that the blister is factory sealed.",
-      query: "1969 Hot Wheels Redline Lola GT70 red blister pack button",
-      reference: "https://redlinepriceguide.com/redline.php?car=1969+Lola+GT+70&yearsearch=n"
+      query: "1969 Hot Wheels Redline Ford Mark IV red blister pack button",
+      reference: "https://redlinepriceguide.com/redline.php?car=1969+Ford+MK+IV&yearsearch=n"
     },
     {
       id: "RL-03", name: "Chaparral 2G", year: "1969",
