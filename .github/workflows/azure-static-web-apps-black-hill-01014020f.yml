@@ -22,9 +22,12 @@ jobs:
       - name: Clean Python files before deploy
         if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
         run: |
-          echo "Removing Python development files"
-          rm -f requirements.txt *.py *.pyc *.spec *.xlsx .env
+          echo "Removing development files not meant for deployment"
+          rm -f requirements.txt *.py *.pyc *.spec *.xlsx .env README.txt
           rm -rf __pycache__ dist venv build
+          # Next.js/React source folders confuse SWA's framework auto-detection
+          # (it switches to Next.js serving mode and the whole site 404s)
+          rm -rf next-source react-next-source
         shell: bash
       - name: Build And Deploy
         id: builddeploy
