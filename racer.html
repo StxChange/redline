@@ -164,7 +164,10 @@
     #lbwrap{width:min(420px,92vw);background:var(--card);border:1px solid rgba(255,255,255,0.08);
       border-radius:14px;padding:18px;}
     #lbwrap h3{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
-      text-align:center;margin-bottom:10px;}
+      text-align:center;margin-bottom:8px;}
+    .lb-prize{margin:0 0 12px;font-size:12px;color:#e8c454;text-align:center;line-height:1.5;
+      background:rgba(201,162,39,0.08);border:1px solid rgba(201,162,39,0.3);border-radius:8px;
+      padding:8px 10px;}
     #lblist{list-style:none;display:flex;flex-direction:column;gap:4px;margin:0 0 14px;}
     #lblist li{display:flex;align-items:center;flex-wrap:wrap;gap:8px;font-size:14px;padding:5px 10px;
       border-radius:7px;background:rgba(255,255,255,0.03);}
@@ -239,6 +242,7 @@
     </div>
     <div id="lbwrap" style="display:none">
       <h3>&#127942; Global Top 10</h3>
+      <p class="lb-prize">Top score each month wins the Hot Wheels Collection Tracker spreadsheet &mdash; free!</p>
       <ol id="lblist"></ol>
       <form id="lbform">
         <input id="lbname" placeholder="Your name" maxlength="24" required autocomplete="name" />
