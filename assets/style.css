@@ -143,6 +143,122 @@ figcaption{margin-top:8px;color:var(--muted)}
   .s16-banner{flex-direction:column;align-items:flex-start}
 }
 
+/* Featured appraisal promo */
+.appr-card{
+  position:relative;
+  background:linear-gradient(135deg,#141207 0%,#26200a 55%,#141207 100%);
+  border:1px solid rgba(201,162,39,0.45);
+  border-radius:16px;
+  padding:30px 28px;
+  box-shadow:0 0 50px rgba(201,162,39,0.12);
+  overflow:hidden;
+}
+.appr-card::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:radial-gradient(ellipse at top left,rgba(201,162,39,0.12) 0%,transparent 60%);
+  pointer-events:none;
+}
+.appr-badge{
+  display:inline-block;
+  background:rgba(201,162,39,0.14);
+  border:1px solid rgba(201,162,39,0.5);
+  color:#e8c454;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  padding:5px 14px;
+  border-radius:999px;
+  margin-bottom:16px;
+}
+.appr-content{
+  display:flex;
+  gap:32px;
+  align-items:center;
+  position:relative;
+}
+.appr-text{flex:1;display:flex;flex-direction:column;gap:12px;}
+.appr-title{margin:0;font-size:26px;font-weight:800;color:#fff;line-height:1.2;}
+.appr-desc{margin:0;color:var(--muted);line-height:1.6;}
+.appr-bullets{
+  margin:0;
+  padding:0 0 0 18px;
+  color:var(--muted);
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+  line-height:1.5;
+}
+.appr-bullets li::marker{color:#e8c454;}
+.appr-price{margin:2px 0 0;color:#e6eef6;font-size:16px;}
+.appr-price strong{color:#e8c454;font-size:19px;}
+.appr-btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:4px;}
+.appr-btn{
+  display:inline-block;
+  background:#c9a227;
+  color:#181203;
+  text-decoration:none;
+  font-weight:800;
+  font-size:15px;
+  padding:13px 24px;
+  border-radius:10px;
+  transition:opacity .15s;
+}
+.appr-btn:hover{opacity:.85;color:#181203;}
+.appr-btn-outline{
+  background:transparent;
+  border:1px solid rgba(201,162,39,0.55);
+  color:#e8c454;
+}
+.appr-btn-outline:hover{color:#e8c454;background:rgba(201,162,39,0.08);}
+.appr-visual{flex-shrink:0;width:280px;}
+.appr-report{
+  background:rgba(7,12,26,0.75);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:12px;
+  padding:16px;
+  font-size:13px;
+  box-shadow:0 12px 34px rgba(0,0,0,0.4);
+  transform:rotate(2deg);
+}
+.appr-report-head{
+  font-weight:800;
+  color:#e6eef6;
+  font-size:13px;
+  letter-spacing:.05em;
+  border-bottom:1px solid rgba(255,255,255,0.1);
+  padding-bottom:8px;
+  margin-bottom:8px;
+}
+.appr-report-row{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  padding:5px 0;
+  color:var(--muted);
+}
+.appr-report-row b{color:#e6eef6;font-variant-numeric:tabular-nums;white-space:nowrap;}
+.appr-report-total{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  border-top:1px solid rgba(201,162,39,0.4);
+  margin-top:8px;
+  padding-top:9px;
+  color:#e8c454;
+  font-weight:700;
+}
+.appr-report-total b{font-variant-numeric:tabular-nums;white-space:nowrap;}
+@media(max-width:720px){
+  .appr-content{flex-direction:column;align-items:stretch;}
+  .appr-visual{width:100%;max-width:320px;margin:0 auto;}
+  .appr-report{transform:none;}
+  .appr-card{padding:22px 18px;}
+  .appr-title{font-size:22px;}
+}
+
 /* Sweet 16 Track Racer — flashy game ad */
 .racer-ad{
   position:relative;
