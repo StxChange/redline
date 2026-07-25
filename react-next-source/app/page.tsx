@@ -276,24 +276,6 @@ const cars: Car[] = [
     query: "1968 Hot Wheels Redline Custom Corvette antifreeze lime blister pack button",
     reference: "https://www.redlinepricing.com/sweet16.html",
   },
-  {
-    id: "RL-15",
-    name: "Sweet 16 custom coupe — tentative",
-    year: "1968",
-    series: "Original Sweet 16",
-    color: "Spectraflame antifreeze / lime",
-    origin: "Base not visible",
-    qty: 1,
-    low: 350,
-    high: 700,
-    rarity: "Identity-dependent",
-    confidence: "Needs verification",
-    image: "/collection/tentative-custom.png",
-    note: "The left-hand car in the final photo is partly blocked. Body shape suggests a Custom T-Bird or adjacent Sweet 16 custom, but the photo is not enough for a defensible identification.",
-    verify: "Send one full side view, the collector button and a sharp base photo before assigning a model-specific value.",
-    query: "1968 Hot Wheels Redline Sweet 16 antifreeze blister pack button",
-    reference: "https://www.redlinepricing.com/sweet16.html",
-  },
 ];
 
 const money = new Intl.NumberFormat("en-US", {
