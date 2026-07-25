@@ -22,12 +22,9 @@ jobs:
       - name: Clean Python files before deploy
         if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
         run: |
-          echo "Removing development files not meant for deployment"
-          rm -f requirements.txt *.py *.pyc *.spec *.xlsx .env README.txt
+          echo "Removing Python development files"
+          rm -f requirements.txt *.py *.pyc *.spec *.xlsx .env
           rm -rf __pycache__ dist venv build
-          # Next.js/React source folders confuse SWA's framework auto-detection
-          # (it switches to Next.js serving mode and the whole site 404s)
-          rm -rf next-source react-next-source
         shell: bash
       - name: Build And Deploy
         id: builddeploy
@@ -43,7 +40,7 @@ jobs:
           # Static site is deployed as-is; the api folder is built (npm install) by the deploy action
           app_location: "/" # root directory
           api_location: "api" # leaderboard Azure Functions
-          output_location: "" # no build output folder — deploy app_location as-is
+          output_location: "." # pre-built files in current location
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:

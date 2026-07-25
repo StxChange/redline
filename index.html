@@ -49,61 +49,17 @@
       <div class="header-text">
         <h1>Redline Pricing Guide</h1>
         <p class="tagline">Your guide to 1968 Redline Hot Wheels — rarity, colors &amp; collector resources</p>
-        <div class="hero-cards">
-          <a class="hero-card hc-play" href="racer.html" onclick="gtag('event','page_view',{page:'racer-hero-card'})">
-            <span class="hc-icon">&#127937;</span>
-            <span class="hc-label">Play &amp; Win</span>
-            <span class="hc-sub">60-second 3D racer &middot; top score each month wins the Collection Tracker</span>
-          </a>
-          <a class="hero-card hc-appraise" href="appraisal-pricing.html" onclick="gtag('event','appraisal_click',{source:'hero-card'})">
-            <span class="hc-icon">&#10024;</span>
-            <span class="hc-label">Get It Appraised</span>
-            <span class="hc-sub">Car-by-car value report &middot; from $39</span>
-          </a>
-          <a class="hero-card hc-track" href="https://www.etsy.com/listing/4487272371/hot-wheels-collection-tracker" target="_blank" rel="noopener" onclick="gtag('event','etsy_click',{item:'hero-card'})">
-            <span class="hc-icon">&#128202;</span>
-            <span class="hc-label">Track It All</span>
-            <span class="hc-sub">54-column collector spreadsheet</span>
-          </a>
+        <div class="cta">
+          <div class="download-row">
+            <a class="btn" href="sweet16.html" onclick="gtag('event','page_view',{page:'sweet16-hero-cta'})">Explore the Sweet 16 &rarr;</a>
+            <a class="btn btn-outline" href="https://www.etsy.com/listing/4487272371/hot-wheels-collection-tracker" target="_blank" rel="noopener" onclick="gtag('event','etsy_click',{item:'hero-cta'})">Get the Collection Tracker</a>
+          </div>
         </div>
       </div>
     </div>
   </header>
 
   <main class="container">
-
-    <section id="appraisal-promo">
-      <div class="appr-card">
-        <div class="appr-badge">&#10024; New &middot; Personal Collection Appraisals</div>
-        <div class="appr-content">
-          <div class="appr-text">
-            <h2 class="appr-title">Not sure what your Redlines are worth?</h2>
-            <p class="appr-desc">Send photographs of your collection and receive a detailed car-by-car report with:</p>
-            <ul class="appr-bullets">
-              <li>Model, year, color, series and country of manufacture</li>
-              <li>Rarity and condition observations</li>
-              <li>Estimated market-price ranges</li>
-              <li>Links to comparable eBay sales</li>
-              <li>A printable or interactive collection report</li>
-            </ul>
-            <p class="appr-price"><strong>Starting at $39</strong> &middot; No need to mail your cars</p>
-            <div class="appr-btns">
-              <a class="appr-btn" href="appraisal-pricing.html" onclick="gtag('event','appraisal_click',{source:'index-featured'})">Get Your Collection Appraised &rarr;</a>
-              <a class="appr-btn appr-btn-outline" href="sample-appraisal.html" onclick="gtag('event','appraisal_sample_click',{source:'index-featured'})">View a Complete Example</a>
-            </div>
-          </div>
-          <div class="appr-visual" aria-hidden="true">
-            <div class="appr-report">
-              <div class="appr-report-head">&#128203; Collection Report</div>
-              <div class="appr-report-row"><span>'68 Custom Camaro &middot; Gold</span><b>$450&ndash;$700</b></div>
-              <div class="appr-report-row"><span>'68 Python &middot; Red</span><b>$120&ndash;$210</b></div>
-              <div class="appr-report-row"><span>'68 Beatnik Bandit &middot; Aqua</span><b>$60&ndash;$110</b></div>
-              <div class="appr-report-total"><span>Collection estimate</span><b>$630&ndash;$1,020</b></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <section id="racer-promo">
       <a class="racer-ad" href="racer.html" onclick="gtag('event','page_view',{page:'racer'})">
@@ -253,7 +209,7 @@
           <ul class="contact-reasons">
             <li>Buying or selling a Redline collection</li>
             <li>Partnership or marketplace integrations</li>
-            <li><a href="appraisal-pricing.html">Premium valuation &amp; appraisal services</a></li>
+            <li>Premium valuation &amp; appraisal services</li>
             <li>Questions about the collection tracker</li>
           </ul>
           <a class="contact-email-btn" href="mailto:eric@stxchange.com">
@@ -280,7 +236,6 @@
         <button class="lb-modal-close" id="closeLeaderboard" aria-label="Close">&times;</button>
       </div>
       <div class="lb-modal-body">
-        <p class="lb-prize">&#127942; <strong>Monthly prize:</strong> the top score each month wins our <a href="https://www.etsy.com/listing/4487272371/hot-wheels-collection-tracker" target="_blank" rel="noopener">Hot Wheels Collection Tracker spreadsheet</a> — free!</p>
         <table class="lb-table">
           <thead><tr><th>#</th><th>Name</th><th>Score</th><th>When</th></tr></thead>
           <tbody id="lbRows"><tr><td colspan="4" class="lb-status">Loading&hellip;</td></tr></tbody>

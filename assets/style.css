@@ -27,49 +27,6 @@ header h1{font-size:36px;margin:0 0 8px}
 
 .cta{margin-top:12px}
 
-/* Hero action cards */
-.hero-cards{
-	display:flex;
-	gap:12px;
-	justify-content:center;
-	margin-top:16px;
-	flex-wrap:wrap;
-}
-.hero-card{
-	display:flex;
-	flex-direction:column;
-	align-items:center;
-	gap:3px;
-	width:210px;
-	padding:12px 14px;
-	border-radius:12px;
-	text-decoration:none;
-	background:rgba(5,10,22,0.72);
-	border:1px solid rgba(255,255,255,0.14);
-	backdrop-filter:blur(6px);
-	transition:transform .15s, border-color .15s, background .15s, box-shadow .15s;
-	text-align:center;
-}
-.hero-card:hover{transform:translateY(-3px);background:rgba(5,10,22,0.85);}
-.hc-icon{font-size:22px;line-height:1;}
-.hc-label{font-size:15px;font-weight:800;color:#fff;letter-spacing:.02em;}
-.hc-sub{font-size:11px;color:var(--muted);line-height:1.4;}
-.hero-card.hc-play{border-color:rgba(255,106,0,0.55);}
-.hero-card.hc-play:hover{border-color:#FF6A00;box-shadow:0 4px 24px rgba(255,106,0,0.25);}
-.hero-card.hc-play .hc-label{color:#FF8A1C;}
-.hero-card.hc-appraise{border-color:rgba(201,162,39,0.55);}
-.hero-card.hc-appraise:hover{border-color:#c9a227;box-shadow:0 4px 24px rgba(201,162,39,0.25);}
-.hero-card.hc-appraise .hc-label{color:#e8c454;}
-.hero-card.hc-track{border-color:rgba(241,100,30,0.5);}
-.hero-card.hc-track:hover{border-color:#f1641e;box-shadow:0 4px 24px rgba(241,100,30,0.25);}
-.hero-card.hc-track .hc-label{color:#f1641e;}
-@media (max-width:699px){
-	.hero-cards{flex-direction:column;align-items:stretch;}
-	.hero-card{width:100%;flex-direction:row;text-align:left;gap:12px;padding:12px 16px;align-items:center;}
-	.hero-card .hc-icon{flex-shrink:0;}
-	.hero-card .hc-label{flex-shrink:0;min-width:118px;}
-}
-
 a.btn{display:inline-block;background:var(--accent);color:white;padding:12px 18px;border-radius:8px;text-decoration:none;margin:0 8px;font-weight:600}
 a.btn-outline{background:transparent;border:1px solid rgba(255,255,255,0.06)}
 
@@ -184,122 +141,6 @@ figcaption{margin-top:8px;color:var(--muted)}
 .s16-banner-arrow{font-size:14px;font-weight:700;color:var(--accent);white-space:nowrap;flex-shrink:0}
 @media(max-width:500px){
   .s16-banner{flex-direction:column;align-items:flex-start}
-}
-
-/* Featured appraisal promo */
-.appr-card{
-  position:relative;
-  background:linear-gradient(135deg,#141207 0%,#26200a 55%,#141207 100%);
-  border:1px solid rgba(201,162,39,0.45);
-  border-radius:16px;
-  padding:30px 28px;
-  box-shadow:0 0 50px rgba(201,162,39,0.12);
-  overflow:hidden;
-}
-.appr-card::before{
-  content:'';
-  position:absolute;
-  inset:0;
-  background:radial-gradient(ellipse at top left,rgba(201,162,39,0.12) 0%,transparent 60%);
-  pointer-events:none;
-}
-.appr-badge{
-  display:inline-block;
-  background:rgba(201,162,39,0.14);
-  border:1px solid rgba(201,162,39,0.5);
-  color:#e8c454;
-  font-size:12px;
-  font-weight:800;
-  letter-spacing:.1em;
-  text-transform:uppercase;
-  padding:5px 14px;
-  border-radius:999px;
-  margin-bottom:16px;
-}
-.appr-content{
-  display:flex;
-  gap:32px;
-  align-items:center;
-  position:relative;
-}
-.appr-text{flex:1;display:flex;flex-direction:column;gap:12px;}
-.appr-title{margin:0;font-size:26px;font-weight:800;color:#fff;line-height:1.2;}
-.appr-desc{margin:0;color:var(--muted);line-height:1.6;}
-.appr-bullets{
-  margin:0;
-  padding:0 0 0 18px;
-  color:var(--muted);
-  display:flex;
-  flex-direction:column;
-  gap:5px;
-  line-height:1.5;
-}
-.appr-bullets li::marker{color:#e8c454;}
-.appr-price{margin:2px 0 0;color:#e6eef6;font-size:16px;}
-.appr-price strong{color:#e8c454;font-size:19px;}
-.appr-btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:4px;}
-.appr-btn{
-  display:inline-block;
-  background:#c9a227;
-  color:#181203;
-  text-decoration:none;
-  font-weight:800;
-  font-size:15px;
-  padding:13px 24px;
-  border-radius:10px;
-  transition:opacity .15s;
-}
-.appr-btn:hover{opacity:.85;color:#181203;}
-.appr-btn-outline{
-  background:transparent;
-  border:1px solid rgba(201,162,39,0.55);
-  color:#e8c454;
-}
-.appr-btn-outline:hover{color:#e8c454;background:rgba(201,162,39,0.08);}
-.appr-visual{flex-shrink:0;width:280px;}
-.appr-report{
-  background:rgba(7,12,26,0.75);
-  border:1px solid rgba(255,255,255,0.1);
-  border-radius:12px;
-  padding:16px;
-  font-size:13px;
-  box-shadow:0 12px 34px rgba(0,0,0,0.4);
-  transform:rotate(2deg);
-}
-.appr-report-head{
-  font-weight:800;
-  color:#e6eef6;
-  font-size:13px;
-  letter-spacing:.05em;
-  border-bottom:1px solid rgba(255,255,255,0.1);
-  padding-bottom:8px;
-  margin-bottom:8px;
-}
-.appr-report-row{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  padding:5px 0;
-  color:var(--muted);
-}
-.appr-report-row b{color:#e6eef6;font-variant-numeric:tabular-nums;white-space:nowrap;}
-.appr-report-total{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  border-top:1px solid rgba(201,162,39,0.4);
-  margin-top:8px;
-  padding-top:9px;
-  color:#e8c454;
-  font-weight:700;
-}
-.appr-report-total b{font-variant-numeric:tabular-nums;white-space:nowrap;}
-@media(max-width:720px){
-  .appr-content{flex-direction:column;align-items:stretch;}
-  .appr-visual{width:100%;max-width:320px;margin:0 auto;}
-  .appr-report{transform:none;}
-  .appr-card{padding:22px 18px;}
-  .appr-title{font-size:22px;}
 }
 
 /* Sweet 16 Track Racer — flashy game ad */
@@ -499,17 +340,6 @@ figcaption{margin-top:8px;color:var(--muted)}
 }
 .lb-modal-close:hover{background:rgba(255,255,255,0.12);color:#e6eef6;}
 .lb-modal-body{overflow-y:auto;padding:14px 22px 20px;}
-.lb-prize{
-  margin:0 0 12px;
-  font-size:13px;
-  color:#e8c454;
-  background:rgba(201,162,39,0.08);
-  border:1px solid rgba(201,162,39,0.35);
-  border-radius:8px;
-  padding:9px 12px;
-  line-height:1.5;
-}
-.lb-prize a{color:#e8c454;font-weight:700;}
 .lb-table{width:100%;border-collapse:collapse;font-size:14px;}
 .lb-table th{
   text-align:left;
