@@ -1,4 +1,4 @@
-const { getTableClient, PARTITION } = require("../shared/tables");
+const { getTableClient, PARTITION, seasonCutoff } = require("../shared/tables");
 
 module.exports = async function (context, req) {
   try {
@@ -9,11 +9,17 @@ module.exports = async function (context, req) {
 
     // Entities come back sorted by RowKey = inverted score, i.e. best first.
     // Keep only each player's best entry (dedupe by email) and never expose emails.
+    const cutoff = seasonCutoff();
     const top = [];
     const seen = new Set();
     let scanned = 0;
     for await (const e of iter) {
       scanned++;
+      // monthly competition: hide scores from before the current window
+      if (String(e.playedAt || "") < cutoff) {
+        if (scanned >= 500) break;
+        continue;
+      }
       const key = String(e.email || "").toLowerCase();
       if (!key || !seen.has(key)) {
         seen.add(key);

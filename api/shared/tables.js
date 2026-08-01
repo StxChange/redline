@@ -21,4 +21,15 @@ function getTableClient() {
   return clientPromise;
 }
 
-module.exports = { getTableClient, PARTITION, RUN_PARTITION: "RUNLOG", MAX_SCORE };
+/* Monthly competition window: the public leaderboard only shows scores from
+   the current UTC calendar month, so it resets automatically on the 1st.
+   SEASON_FLOOR additionally hides everything from the July 2026 contest:
+   scores posted before midnight Aug 1, 2026 US Eastern (04:00 UTC). */
+const SEASON_FLOOR = "2026-08-01T04:00:00.000Z";
+function seasonCutoff() {
+  const now = new Date();
+  const monthStart = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1)).toISOString();
+  return monthStart > SEASON_FLOOR ? monthStart : SEASON_FLOOR;
+}
+
+module.exports = { getTableClient, PARTITION, RUN_PARTITION: "RUNLOG", MAX_SCORE, seasonCutoff };
